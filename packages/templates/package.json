@@ -1,0 +1,9 @@
+{
+  "name": "@ui/templates",
+  "private": "true",
+  "version": "1.0.0",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "dev": "tsc --watch --preserveWatchOutput"
+  }
+}
