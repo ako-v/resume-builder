@@ -1,11 +1,9 @@
 "use client";
 import { experimental_extendTheme as extendTheme } from "@mui/material/styles";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+const fontFamily = Inter({
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const createTheme = (direction: "rtl" | "ltr") => {
@@ -50,7 +48,7 @@ export const createTheme = (direction: "rtl" | "ltr") => {
       },
     },
     typography: {
-      fontFamily: roboto.style.fontFamily,
+      fontFamily: fontFamily.style.fontFamily,
     },
     direction,
     components: {
