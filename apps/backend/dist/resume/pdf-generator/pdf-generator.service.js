@@ -8,15 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PdfGeneratorService = void 0;
 const common_1 = require("@nestjs/common");
 const puppeteer_1 = require("puppeteer");
 const template_renderer_service_1 = require("../template-renderer/template-renderer.service");
 const http_status_message_enum_1 = require("../../shared/http-status-message.enum");
+const constants_1 = require("../../shared/constants");
 let PdfGeneratorService = class PdfGeneratorService {
-    constructor(templateRendererService) {
+    constructor(templateRendererService, browser) {
         this.templateRendererService = templateRendererService;
+        this.browser = browser;
     }
     async generatePdf(templateName, data) {
         const html = this.templateRendererService.render({
@@ -33,14 +38,21 @@ let PdfGeneratorService = class PdfGeneratorService {
     }
     async convertToPdf(html) {
         try {
-            const browser = await puppeteer_1.default.launch({ headless: 'new' });
-            const page = await browser.newPage();
+            const page = await this.browser.newPage();
+            await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36');
             await page.setContent(html, { waitUntil: 'networkidle0' });
             const pdf = await page.pdf({
                 format: 'A4',
                 printBackground: true,
+                displayHeaderFooter: false,
+                margin: {
+                    top: '0.3in',
+                    bottom: '0.3in',
+                    left: '0',
+                    right: '0',
+                },
             });
-            await browser.close();
+            await page.close();
             return pdf;
         }
         catch (error) {
@@ -51,6 +63,8 @@ let PdfGeneratorService = class PdfGeneratorService {
 exports.PdfGeneratorService = PdfGeneratorService;
 exports.PdfGeneratorService = PdfGeneratorService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [template_renderer_service_1.TemplateRendererService])
+    __param(1, (0, common_1.Inject)(constants_1.Providers.BROWSER)),
+    __metadata("design:paramtypes", [template_renderer_service_1.TemplateRendererService,
+        puppeteer_1.Browser])
 ], PdfGeneratorService);
 //# sourceMappingURL=pdf-generator.service.js.map

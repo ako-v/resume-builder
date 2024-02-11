@@ -35,15 +35,14 @@ let TemplateRendererService = class TemplateRendererService {
         this.converToHtml = (html, css) => {
             return `
     <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      ${css}
-    </head>
-    <body>
-      ${html}
-    </body>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        ${css}
+      </head>
+      <body>
+        ${html}
+      </body>
     </html>`;
         };
         this.stylecsheet = new styled_components_1.ServerStyleSheet();

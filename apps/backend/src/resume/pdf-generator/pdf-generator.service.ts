@@ -1,13 +1,15 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import puppeteer from 'puppeteer';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { Browser } from 'puppeteer';
 
 import { TemplateRendererService } from '../template-renderer/template-renderer.service';
 import { HttpStatusMessage } from '../../shared/http-status-message.enum';
+import { Providers } from 'src/shared/constants';
 
 @Injectable()
 export class PdfGeneratorService {
   constructor(
     private readonly templateRendererService: TemplateRendererService,
+    @Inject(Providers.BROWSER) private browser: Browser,
   ) {}
 
   async generatePdf(templateName: string, data: any) {
@@ -29,14 +31,24 @@ export class PdfGeneratorService {
 
   private async convertToPdf(html: string) {
     try {
-      const browser = await puppeteer.launch({ headless: 'new' });
-      const page = await browser.newPage();
+      const page = await this.browser.newPage();
+      await page.setUserAgent(
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
+      );
+
       await page.setContent(html, { waitUntil: 'networkidle0' });
       const pdf = await page.pdf({
         format: 'A4',
         printBackground: true,
+        displayHeaderFooter: false,
+        margin: {
+          top: '0.3in',
+          bottom: '0.3in',
+          left: '0',
+          right: '0',
+        },
       });
-      await browser.close();
+      await page.close();
       return pdf;
     } catch (error) {
       throw new HttpException(

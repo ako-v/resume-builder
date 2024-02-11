@@ -12,6 +12,7 @@ const resume_service_1 = require("./resume.service");
 const resume_controller_1 = require("./resume.controller");
 const template_renderer_service_1 = require("./template-renderer/template-renderer.service");
 const pdf_generator_service_1 = require("./pdf-generator/pdf-generator.service");
+const puppeteer_module_1 = require("./puppeteer/puppeteer.module");
 let ResumeModule = class ResumeModule {
 };
 exports.ResumeModule = ResumeModule;
@@ -19,6 +20,7 @@ exports.ResumeModule = ResumeModule = __decorate([
     (0, common_1.Module)({
         providers: [resume_service_1.ResumeService, template_renderer_service_1.TemplateRendererService, pdf_generator_service_1.PdfGeneratorService],
         controllers: [resume_controller_1.ResumeController],
+        imports: [puppeteer_module_1.PuppeteerModule],
     })
 ], ResumeModule);
 //# sourceMappingURL=resume.module.js.map

@@ -11,11 +11,11 @@ export class ResumeController {
   @Post()
   async createResume(
     @Body() body: { name: string; data: any },
-    @Res({ passthrough: true }) response: Response
+    @Res({ passthrough: true }) response: Response,
   ) {
     const pdf = await this.pdfGeneratorService.generatePdf(
       body.name,
-      body.data
+      body.data,
     );
     response.contentType('application/pdf');
     response.attachment();
