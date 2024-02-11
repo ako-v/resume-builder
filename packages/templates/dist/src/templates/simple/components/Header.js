@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var jsx_runtime_1 = require("react/jsx-runtime");
-var Header = function () {
-    return ((0, jsx_runtime_1.jsxs)("section", { className: "mb-2", children: [(0, jsx_runtime_1.jsx)("h1", { className: "text-primary text-[42px] font-bold uppercase leading-10 mb-1", children: "Ako Veysinejad" }), (0, jsx_runtime_1.jsx)("h2", { className: "text-[22px] font-semibold leading-8", children: "Frontend Developer" }), (0, jsx_runtime_1.jsxs)("div", { className: "flex gap-1 justify-start items-center", children: [(0, jsx_runtime_1.jsx)("span", { className: "text-xs", children: "Tehran, Iran" }), (0, jsx_runtime_1.jsx)("span", { className: "h-3 border-l border-secondary border-opacity-65" }), (0, jsx_runtime_1.jsx)("a", { href: "tel:+989357225422", className: "text-xs text-link", children: "+98 935 722 5422" }), (0, jsx_runtime_1.jsx)("span", { className: "h-3 border-l border-secondary border-opacity-65" }), (0, jsx_runtime_1.jsx)("a", { href: "mailto:a.veysinejad@gmail.com", className: "text-xs text-link", children: "a.veysinejad@gmail.com" }), (0, jsx_runtime_1.jsx)("span", { className: "h-3 border-l border-secondary border-opacity-65" }), (0, jsx_runtime_1.jsx)("a", { href: "https://www.linkedin.com/in/ako-veysinejad/", className: "text-xs text-link", children: "linkedin.com/in/ako-veysinejad" })] })] }));
-};
-exports.default = Header;
