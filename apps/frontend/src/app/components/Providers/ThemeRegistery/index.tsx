@@ -1,4 +1,5 @@
 "use client";
+
 import { useMemo } from "react";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { Experimental_CssVarsProvider as CSSVarsProvider } from "@mui/material/styles";
@@ -8,8 +9,8 @@ import rtlPlugin from "stylis-plugin-rtl";
 
 import { createTheme } from "@/configs/theme";
 
-export default function ThemeRegistry({ children, params }: { children: React.ReactNode; params: { lang: string } }) {
-  const direction = dir(params.lang);
+export default function ThemeRegistry({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+  const direction = dir(params.locale);
   const theme = useMemo(() => {
     return createTheme(direction);
   }, [direction]);

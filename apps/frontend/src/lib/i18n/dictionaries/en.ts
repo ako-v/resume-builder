@@ -29,18 +29,6 @@ const dictionary = {
     500: "server error",
     unknown: "unknown error",
   },
-  adminSidebar: {
-    dashboard: "dashboard",
-    categories: "categories",
-    orders: "orders",
-    products: "products",
-    reviews: "reviews",
-    users: "users",
-    settings: "settings",
-    profile: "profile",
-    productsList: "products list",
-    addProduct: "add product",
-  },
 };
 export default dictionary;
 

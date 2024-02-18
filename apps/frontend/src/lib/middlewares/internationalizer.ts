@@ -1,38 +1,30 @@
-import { NextResponse } from "next/server";
-import type { NextRequest, NextFetchEvent } from "next/server";
-
 import { MiddlewareFactory } from "@/@types/middleware";
-import { getMatchedLocale } from "@/lib/utils/getCurrentLocale";
-import { languages } from "@/lib/i18n/config";
+import { i18nRouter } from "next-i18n-router";
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import i18nConfig from "@/../i18nConfig";
 
-export const internationalizer: MiddlewareFactory = (next) => {
+export const localizer: MiddlewareFactory = (next) => {
   return async (request: NextRequest, event: NextFetchEvent) => {
-    const pathname = request.nextUrl.pathname;
-
-    // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-    // If you have one
-    // if (
-    //   [
-    //     '/manifest.json',
-    //     '/favicon.ico',
-    //     // Your other files in `public`
-    //   ].includes(pathname)
-    // )
-    //   return
-
-    // Check if there is any supported locale in the pathname
-    const pathnameIsMissingLocale = languages.every(
-      (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-    );
-
-    // Redirect if there is no locale
-    if (pathnameIsMissingLocale) {
-      const locale = getMatchedLocale(request);
-
-      // e.g. incoming request is /products
-      // The new URL is now /en-US/products
-      return NextResponse.redirect(new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url));
+    const i18nResponse = i18nRouter(request, i18nConfig);
+    // return i18nResponse;
+    if (
+      i18nResponse.headers.get("x-middleware-request-cookie")?.split("=")[1] !==
+      i18nResponse.headers.get("x-next-i18n-router-locale")
+    ) {
+      return i18nResponse;
+    } else if (i18nResponse.headers.get("x-next-i18n-router-locale") === i18nConfig.defaultLocale) {
+      const pathname = request.nextUrl.pathname;
+      const newPath = `${i18nConfig.defaultLocale}${pathname}`;
+      const responseOptions = {
+        request: {
+          headers: new Headers(request.headers),
+        },
+      };
+      const response = NextResponse.rewrite(new URL(newPath, request.url), responseOptions);
+      return response;
+    } else {
+      console.log("im here");
+      return next(request, event);
     }
-    return await next(request, event);
   };
 };
