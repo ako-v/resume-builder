@@ -1,10 +1,10 @@
 import Heading from "../../../components/Heading";
 import Section from "../../../components/Section";
-import { TemplateProps } from "../../@types";
+import { TemplatePropsInputs } from "../../../@types";
 import ExperiencePart from "./ExperiencePart";
 
 export type ExperienceProps = {
-  experiences: TemplateProps["experiences"];
+  experiences: TemplatePropsInputs["experiences"];
 };
 
 export const Experience: React.FC<ExperienceProps> = ({ experiences }) => {

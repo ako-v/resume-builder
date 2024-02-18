@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { browserProvider } from './puppeteer.service';
+import { PuppeteerService } from './puppeteer.service';
 
 @Module({
-  providers: [browserProvider],
-  exports: [browserProvider],
+  providers: [PuppeteerService],
+  exports: [PuppeteerService],
 })
 export class PuppeteerModule {}

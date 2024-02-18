@@ -1,7 +1,7 @@
 "use-client";
 
 import styled, { createGlobalStyle } from "styled-components";
-import { TemplateProps } from "../@types";
+import { TemplatePropsInputs } from "../../@types";
 import Section from "../../components/Section";
 import Name from "../../components/Name";
 import PersonalInfoContainer from "../../components/PersonalInfoContainer";
@@ -15,7 +15,7 @@ import { Languages } from "./components/Languages";
 import JobTitle from "../../components/JobTitle";
 
 /* eslint-disable-next-line */
-export type OwlProps = TemplateProps & {};
+export type OwlProps = TemplatePropsInputs & {};
 
 const GlobalStyles = createGlobalStyle`
   * {

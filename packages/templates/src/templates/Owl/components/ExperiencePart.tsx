@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Fragment } from "react";
-import { TemplateProps } from "../../@types";
+import { TemplatePropsInputs } from "../../../@types";
 
-export type ExperiencePartProps = TemplateProps["experiences"][0] & {};
+export type ExperiencePartProps = TemplatePropsInputs["experiences"][0] & {};
 
 const ExperienceContainer = styled.div`
   display: grid;

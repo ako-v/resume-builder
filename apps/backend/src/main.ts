@@ -3,9 +3,14 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // Starts listening for shutdown hooks
+  app.enableShutdownHooks();
+
   app.enableCors();
+
   const globalPrefix = 'api/v1';
   app.setGlobalPrefix(globalPrefix);
+
   const port = process.env.PORT || 5000;
   await app.listen(port);
 }

@@ -1,15 +1,14 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Browser } from 'puppeteer';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { TemplateRendererService } from '../template-renderer/template-renderer.service';
 import { HttpStatusMessage } from '../../shared/http-status-message.enum';
-import { Providers } from 'src/shared/constants';
+import { PuppeteerService } from '../puppeteer/puppeteer.service';
 
 @Injectable()
 export class PdfGeneratorService {
   constructor(
     private readonly templateRendererService: TemplateRendererService,
-    @Inject(Providers.BROWSER) private browser: Browser,
+    private readonly puppeteerService: PuppeteerService,
   ) {}
 
   async generatePdf(templateName: string, data: any) {
@@ -31,7 +30,7 @@ export class PdfGeneratorService {
 
   private async convertToPdf(html: string) {
     try {
-      const page = await this.browser.newPage();
+      const page = await this.puppeteerService.browser.newPage();
       await page.setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
       );

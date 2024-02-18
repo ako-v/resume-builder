@@ -1,10 +1,33 @@
-import puppeteer from 'puppeteer';
+import { Injectable, OnModuleDestroy } from '@nestjs/common';
+import * as puppeteer from 'puppeteer';
 
-export const browserProvider = {
-  provide: 'BROWSER',
-  useFactory: async () =>
-    await puppeteer.launch({
+@Injectable()
+export class PuppeteerService implements OnModuleDestroy {
+  public browser: puppeteer.Browser;
+
+  constructor() {
+    if (!this.browser) this.initialize();
+  }
+
+  async initialize() {
+    this.browser = await puppeteer.launch({
       headless: 'new',
-      args: ['--no-sandbox', '--font-render-hinting=none'],
-    }),
-};
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    // Listen for shutdown signals
+    process.on('SIGINT', () => this.closeBrowser());
+    process.on('SIGTERM', () => this.closeBrowser());
+    process.on('SIGQUIT', () => this.closeBrowser());
+  }
+
+  async closeBrowser() {
+    if (this.browser) {
+      await this.browser.close();
+    }
+  }
+
+  async onModuleDestroy() {
+    await this.closeBrowser();
+  }
+}

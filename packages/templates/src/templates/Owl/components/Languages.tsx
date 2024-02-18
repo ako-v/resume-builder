@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Heading from "../../../components/Heading";
 import Section from "../../../components/Section";
-import { TemplateProps } from "../../@types";
+import { TemplatePropsInputs } from "../../../@types";
 
 const LanguagesContainer = styled.div`
   display: grid;
@@ -19,7 +19,7 @@ const Proficiency = styled.div`
 `;
 
 export type LanguagesProps = {
-  languages: TemplateProps["languages"];
+  languages: TemplatePropsInputs["languages"];
 };
 
 export const Languages: React.FC<LanguagesProps> = ({ languages }) => {

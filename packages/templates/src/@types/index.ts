@@ -1,4 +1,4 @@
-export type TemplateProps = {
+export type TemplatePropsInputs = {
   personalInfo: {
     name: string;
     jobTitle: string;

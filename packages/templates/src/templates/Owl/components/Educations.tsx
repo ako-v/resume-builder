@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Section from "../../../components/Section";
 import Heading from "../../../components/Heading";
-import { TemplateProps } from "../../@types";
+import { TemplatePropsInputs } from "../../../@types";
 
 const ExperienceContainer = styled.div`
   display: grid;
@@ -26,7 +26,7 @@ const FieldofStudy = styled.div`
 const University = styled.div``;
 
 export type EducationsProps = {
-  educations: TemplateProps["educations"];
+  educations: TemplatePropsInputs["educations"];
 };
 
 export const Educations: React.FC<EducationsProps> = ({ educations }) => {
