@@ -1,7 +1,5 @@
 import { stackMiddleware } from "@/lib/middlewares/stackMiddleware";
-// import { internationalizer } from "@/lib/middlewares/internationalizer";
-import { localizer } from "./lib/middlewares/localizer";
-// import { internationalizerNotPrefixed } from "./lib/middlewares/internationalizerNotPrefixed";
+import { localizer } from "./lib/middlewares/internationalizer";
 
 const middlewares = [localizer];
 
