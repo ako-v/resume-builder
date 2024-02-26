@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Providers from "../components/Providers";
+import Providers from "@/components/features/Providers";
 import { dir } from "i18next";
 import i18nConfig from "@/../i18nConfig";
+import Paper from "@mui/material/Paper";
+import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
 
 const fontFamily = Inter({ subsets: ["latin"] });
 
@@ -26,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang={locale} dir={dir(locale)}>
       <body className={fontFamily.className}>
-        <Providers params={{ locale }}>{children}</Providers>
+        {getInitColorSchemeScript()}
+        <Providers params={{ locale }}>
+          <Paper className="h-screen rounded-none">{children}</Paper>
+        </Providers>
       </body>
     </html>
   );

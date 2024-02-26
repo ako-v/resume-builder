@@ -1,7 +1,7 @@
 import { stackMiddleware } from "@/lib/middlewares/stackMiddleware";
-import { localizer } from "./lib/middlewares/internationalizer";
+import { internationalizer } from "./lib/middlewares/internationalizer";
 
-const middlewares = [localizer];
+const middlewares = [internationalizer];
 
 export default stackMiddleware(middlewares);
 

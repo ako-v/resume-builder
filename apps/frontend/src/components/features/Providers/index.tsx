@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { SnackbarProvider } from "notistack";
 import ThemeRegistry from "./ThemeRegistery";
 // import ReduxProvider from "./ReduxProvider/ReduxProvider";
-import TranslationProvider from "@/app/components/Providers/TranslationProvider";
+import TranslationProvider from "./TranslationProvider";
 import StyledComponentsProvider from "./StyledComponentsProvider";
 
 export type ProvidersProps = {

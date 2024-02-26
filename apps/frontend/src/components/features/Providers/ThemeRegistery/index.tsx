@@ -11,6 +11,7 @@ import { createTheme } from "@/configs/theme";
 
 export default function ThemeRegistry({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
   const direction = dir(params.locale);
+
   const theme = useMemo(() => {
     return createTheme(direction);
   }, [direction]);
@@ -22,7 +23,9 @@ export default function ThemeRegistry({ children, params }: { children: React.Re
         stylisPlugins: direction === "ltr" ? [] : [prefixer, rtlPlugin],
       }}
     >
-      <CSSVarsProvider theme={theme}>{children}</CSSVarsProvider>
+      <CSSVarsProvider theme={theme} defaultMode="system">
+        {children}
+      </CSSVarsProvider>
     </AppRouterCacheProvider>
   );
 }
