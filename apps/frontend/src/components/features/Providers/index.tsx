@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import { SnackbarProvider } from "notistack";
 import ThemeRegistry from "./ThemeRegistery";
-// import ReduxProvider from "./ReduxProvider/ReduxProvider";
+import ReduxProvider from "./ReduxProvider";
 import TranslationProvider from "./TranslationProvider";
 import StyledComponentsProvider from "./StyledComponentsProvider";
 
@@ -17,13 +17,13 @@ export type ProvidersProps = {
 const Providers: React.FC<ProvidersProps> = ({ children, params }) => {
   return (
     <ThemeRegistry params={params}>
-      {/* <ReduxProvider> */}
-      <TranslationProvider locale={params.locale}>
-        <SnackbarProvider maxSnack={3}>
-          <StyledComponentsProvider>{children}</StyledComponentsProvider>
-        </SnackbarProvider>
-      </TranslationProvider>
-      {/* </ReduxProvider> */}
+      <ReduxProvider>
+        <TranslationProvider locale={params.locale}>
+          <SnackbarProvider maxSnack={3}>
+            <StyledComponentsProvider>{children}</StyledComponentsProvider>
+          </SnackbarProvider>
+        </TranslationProvider>
+      </ReduxProvider>
     </ThemeRegistry>
   );
 };

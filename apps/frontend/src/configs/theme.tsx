@@ -95,6 +95,13 @@ export const createTheme = (direction: "rtl" | "ltr") => {
         defaultProps: {
           margin: "dense",
         },
+        styleOverrides: {
+          input: {
+            "&:-webkit-autofill": {
+              boxShadow: "0 0 0 100px var(--mui-palette-background-paper) inset !important",
+            },
+          },
+        },
       },
       MuiInputLabel: {
         defaultProps: {

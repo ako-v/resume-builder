@@ -36,7 +36,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
               <LockIcon />
             </InputAdornment>
           ) : (
-            InputProps?.startAdornment
+            startAdornment
           ),
         endAdornment:
           type === "password" ? (
