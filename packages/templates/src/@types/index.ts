@@ -1,6 +1,7 @@
 export type TemplatePropsInputs = {
   personalInfo: {
-    name: string;
+    firstName: string;
+    lastName: string;
     jobTitle: string;
     email: string;
     phone: string;
@@ -9,6 +10,7 @@ export type TemplatePropsInputs = {
     linkedin?: string;
     github?: string;
     twitter?: string;
+    [key: string]: string | undefined;
   };
   summary: string;
   skills: string[];

@@ -1,26 +1,26 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { TemplatePropsInputs } from "@ui/templates";
 
 export type ResumeDataType = {
-  personalDetail: {
-    firstName: string;
-    lastName: string;
-    jobTitle: string;
-    phone?: string;
-    email?: string;
-    address?: string;
-    city?: string;
-    zipcode?: string;
-    state?: string;
-    country?: string;
-    [key: string]: string | undefined;
-  };
+  personalInfo: TemplatePropsInputs["personalInfo"];
 };
 
 const initialState: ResumeDataType = {
-  personalDetail: {
+  personalInfo: {
     firstName: "",
     lastName: "",
     jobTitle: "",
+    phone: "",
+    email: "",
+    address: "",
+    city: "",
+    zipcode: "",
+    state: "",
+    country: "",
+    github: "",
+    website: "",
+    linkedin: "",
+    twitter: "",
   },
 };
 
@@ -28,9 +28,9 @@ const resumeDataSlice = createSlice({
   name: "resumeData",
   initialState,
   reducers: {
-    setPersonalDetail: (state, { payload }: PayloadAction<ResumeDataType["personalDetail"]>) => {
+    setPersonalDetail: (state, { payload }: PayloadAction<ResumeDataType["personalInfo"]>) => {
       console.log(payload);
-      state.personalDetail = payload;
+      state.personalInfo = payload;
     },
     setResumeField: (
       state,

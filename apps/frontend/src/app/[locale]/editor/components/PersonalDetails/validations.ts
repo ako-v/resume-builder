@@ -1,7 +1,8 @@
 import { TFunction } from "@/@types/dto/i18n";
 import { RegisterOptions } from "react-hook-form";
+import { FormFields } from ".";
 
-export const getRules = (t: TFunction): Record<string, RegisterOptions> => {
+export const getRules = (t: TFunction): Record<keyof FormFields, RegisterOptions> => {
   return {
     firstName: {
       required: t("validation.required", { field: t("form.firstName") }),
@@ -50,28 +51,24 @@ export const getRules = (t: TFunction): Record<string, RegisterOptions> => {
       },
     },
     city: {
-      required: t("validation.required"),
       maxLength: {
         value: 30,
         message: t("validation.maxLength", { length: 30 }),
       },
     },
     zipcode: {
-      required: t("validation.required"),
       pattern: {
         value: /^[0-9]*$/,
         message: t("validation.zipcode"),
       },
     },
     state: {
-      required: t("validation.required"),
       maxLength: {
         value: 4,
         message: t("validation.maxLength", { length: 4 }),
       },
     },
     country: {
-      required: t("validation.required"),
       maxLength: {
         value: 30,
         message: t("validation.maxLength", { length: 30 }),

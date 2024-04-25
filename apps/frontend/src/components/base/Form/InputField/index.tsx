@@ -28,7 +28,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
   return (
     <TextField
       error={invalid}
-      helperText={errorMessage}
+      helperText={errorMessage || " "}
       InputProps={{
         startAdornment:
           type === "password" ? (

@@ -2,7 +2,7 @@
 
 import Button from "@/components/base/Button";
 import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PersonalDetails from "../PersonalDetails";
 
@@ -10,23 +10,36 @@ export type EditorProps = {
   /* types */
 };
 
+export type EditorStepHandle = {
+  onSubmit: () => Promise<void>;
+};
+
 const Editor: React.FC<EditorProps> = (props) => {
   const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = useMemo(() => {
-    return [
-      { title: t("editorPage.personalDetails"), description: t("editorPage.personalDetailsDescription") },
-      { title: t("editorPage.experiences"), description: t("editorPage.experiencesDescription") },
-      { title: t("editorPage.education"), description: t("editorPage.educationDescription") },
-      { title: t("editorPage.skills"), description: t("editorPage.skillsDescription") },
-      { title: t("editorPage.languages"), description: t("editorPage.languagesDescription") },
-    ];
-  }, [t]);
+  const personalDetailRef = useRef<EditorStepHandle>(null);
+
+  const steps = [
+    {
+      title: t("editorPage.personalDetails"),
+      description: t("editorPage.personalDetailsDescription"),
+      ref: personalDetailRef,
+    },
+    { title: t("editorPage.experiences"), description: t("editorPage.experiencesDescription") },
+    { title: t("editorPage.education"), description: t("editorPage.educationDescription") },
+    { title: t("editorPage.skills"), description: t("editorPage.skillsDescription") },
+    { title: t("editorPage.languages"), description: t("editorPage.languagesDescription") },
+  ];
 
   const handleNext = () => {
     if (activeStep < steps.length) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      steps[activeStep].ref?.current
+        ?.onSubmit()
+        .then((res) => {
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        })
+        .catch(() => {});
     } else {
       // handle finish
     }
@@ -57,7 +70,7 @@ const Editor: React.FC<EditorProps> = (props) => {
       </Box>
       <Box>
         <Typography className="mb-3">{steps[activeStep].description}</Typography>
-        {activeStep === 0 && <PersonalDetails />}
+        {activeStep === 0 && <PersonalDetails ref={personalDetailRef} />}
       </Box>
     </Box>
   );

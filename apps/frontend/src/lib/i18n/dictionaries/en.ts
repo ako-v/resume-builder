@@ -20,6 +20,10 @@ const dictionary = {
     jobTitle: "job title",
     submit: "submit",
     register: "register",
+    website: "website",
+    twitter: "twitter",
+    linkedin: "linkedin",
+    github: "github",
   },
   editorPage: {
     personalDetails: "Personal details",
@@ -33,7 +37,7 @@ const dictionary = {
     languages: "Languages",
     languagesDescription: "Enter your languages",
   },
-  validations: {
+  validation: {
     required: "{{field}} is required",
     emailInvalid: "please provide a valid email address",
     passwordInvalid: "password must be at least 8 characters long, contain lowecase, uppercase and number",

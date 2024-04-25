@@ -111,27 +111,43 @@ function Owl(props: OwlProps) {
       <GlobalStyles />
       <Container id="resume-container">
         <Section id="header">
-          <Name>{props.personalInfo.name}</Name>
+          <Name>
+            {props.personalInfo.firstName} {props.personalInfo.lastName}
+          </Name>
           <JobTitle>{props.personalInfo.jobTitle}</JobTitle>
           <PersonalInfoContainer>
             {props.personalInfo.address && <InfoSpan>{props.personalInfo.address}</InfoSpan>}
+            {props.personalInfo.city && <InfoSpan>{props.personalInfo.city}</InfoSpan>}
+            {props.personalInfo.state && <InfoSpan>{props.personalInfo.state}</InfoSpan>}
+            {props.personalInfo.country && <InfoSpan>{props.personalInfo.country}</InfoSpan>}
+            {props.personalInfo.zipcode && <InfoSpan>{props.personalInfo.zipcode}</InfoSpan>}
             <Divider />
 
-            <Link href={`tel:${props.personalInfo.phone}`}>{props.personalInfo.phone}</Link>
+            <Link target="_blank" rel="noreferrer" href={`tel:${props.personalInfo.phone}`}>
+              {props.personalInfo.phone}
+            </Link>
             <Divider />
 
-            <Link href={`mailto:${props.personalInfo.email}`}>{props.personalInfo.email}</Link>
+            <Link target="_blank" rel="noreferrer" href={`mailto:${props.personalInfo.email}`}>
+              {props.personalInfo.email}
+            </Link>
             <Divider />
 
             {props.personalInfo.website && (
               <>
-                <Link href={`https://${props.personalInfo.website}`}>{props.personalInfo.website}</Link>
+                <Link target="_blank" rel="noreferrer" href={`https://${props.personalInfo.website}`}>
+                  {props.personalInfo.website}
+                </Link>
                 <Divider />
               </>
             )}
             {props.personalInfo.linkedin && (
               <>
-                <Link href={`https://www.linkedin.com/in/${props.personalInfo.linkedin}`}>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://www.linkedin.com/in/${props.personalInfo.linkedin}`}
+                >
                   linkedin.com/in/{props.personalInfo.linkedin}
                 </Link>
                 <Divider />
@@ -139,7 +155,7 @@ function Owl(props: OwlProps) {
             )}
             {props.personalInfo.github && (
               <>
-                <Link href={`https://github.com/${props.personalInfo.github}`}>
+                <Link target="_blank" rel="noreferrer" href={`https://github.com/${props.personalInfo.github}`}>
                   github.com/{props.personalInfo.github}
                 </Link>
                 <Divider />
@@ -147,7 +163,7 @@ function Owl(props: OwlProps) {
             )}
             {props.personalInfo.twitter && (
               <>
-                <Link href={`https://twitter.com/${props.personalInfo.twitter}`}>
+                <Link target="_blank" rel="noreferrer" href={`https://twitter.com/${props.personalInfo.twitter}`}>
                   twitter.com/{props.personalInfo.twitter}
                 </Link>
               </>
