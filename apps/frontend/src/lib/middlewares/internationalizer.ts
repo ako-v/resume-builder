@@ -1,6 +1,6 @@
 import { MiddlewareFactory } from "@/@types/middleware";
 import { i18nRouter } from "next-i18n-router";
-import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import { NextFetchEvent, NextRequest } from "next/server";
 import i18nConfig from "@/../i18nConfig";
 /**
  *
@@ -10,7 +10,7 @@ import i18nConfig from "@/../i18nConfig";
  */
 export const internationalizer: MiddlewareFactory = (next) => {
   return async (request: NextRequest, event: NextFetchEvent) => {
-    const i18nResponse = i18nRouter(request, { ...i18nConfig });
+    const i18nResponse = i18nRouter(request, { ...i18nConfig, prefixDefault: true });
     return i18nResponse;
     // if (
     //   i18nResponse.headers.get("x-middleware-request-cookie")?.split("=")[1] !==

@@ -13,6 +13,11 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
   api,
   extraOptions
 ) => {
+  // Ensure the response type is set to 'blob' for binary data
+  if (typeof args !== "string" && args.responseHandler === undefined) {
+    args.responseHandler = (response) => response.blob();
+  }
+
   const result = await customFetchBaseQuery(args, api, extraOptions);
 
   if (result.error) {

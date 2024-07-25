@@ -1,7 +1,8 @@
 import React from "react";
-import Editor from "./components/Editor";
-import RenderTemplatePage from "../renderTemplate/page";
-import RenderTemplate from "./components/RenderTemplate";
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("./components/Editor"));
+const RenderTemplate = dynamic(() => import("./components/RenderTemplate"), { ssr: false });
 
 type EditorPageProps = {
   params: {
@@ -13,7 +14,9 @@ const EditorPage: React.FC<EditorPageProps> = ({ params: { locale } }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 p-3">
       <Editor />
-      <RenderTemplate />
+      <div className="h-[calc(100vh-32px)] overflow-auto">
+        <RenderTemplate locale={locale} />
+      </div>
     </div>
   );
 };

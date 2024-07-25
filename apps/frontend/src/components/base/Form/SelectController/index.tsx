@@ -2,12 +2,12 @@ import React from "react";
 import { Controller, RegisterOptions } from "react-hook-form";
 import Select, { SelectProps } from "../Select";
 
-export interface SelectControllerProps extends SelectProps {
+export type SelectControllerProps = SelectProps & {
   label?: string;
   name: string;
   control: any;
   rules?: RegisterOptions;
-}
+};
 
 export const SelectController: React.FunctionComponent<SelectControllerProps> = ({
   name,

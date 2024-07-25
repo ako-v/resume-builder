@@ -1,20 +1,24 @@
-import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
-import { useForm, WatchObserver } from "react-hook-form";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { getRules } from "./validations";
 import { EditorStepHandle } from "../Editor";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import InputController from "@/components/base/Form/InputController";
-import { ResumeDataType, setResumeField } from "@/redux/resumeDataSlice";
-import useFormWatch from "@/lib/hooks/useFormWatch";
-import debounce from "@/lib/utils/debounce";
+import { ResumeDataType, setPersonalDetail } from "@/redux/resumeDataSlice";
+// import TextEditor from "@/components/base/TextEditor";
+import { Range } from "quill";
+import { Delta } from "quill/core";
+import dynamic from "next/dynamic";
 
 export type PersonalDetailsProps = {
   /* types */
 };
 
 export type FormFields = ResumeDataType["personalInfo"];
+
+const TextEditor = dynamic(() => import("@/components/base/TextEditor"), { ssr: false });
 
 const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((props, ref) => {
   const { t } = useTranslation();
@@ -28,22 +32,14 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
     },
   });
 
-  const rules = useMemo(() => getRules(t), [t]);
+  const rules = getRules(t);
 
-  const handleFormChange: WatchObserver<FormFields> = useCallback(
-    (data) => {
-      timeoutRef.current = debounce(
-        () => {
-          dispatch(setResumeField({ key: "personalInfo", value: data as FormFields }));
-        },
-        timeoutRef.current,
-        1000
-      );
-    },
-    [dispatch]
-  );
-
-  useFormWatch(watch, handleFormChange);
+  watch((data) => {
+    timeoutRef?.current && clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      dispatch(setPersonalDetail(data as FormFields));
+    }, 1000);
+  });
 
   useImperativeHandle(
     ref,
@@ -51,13 +47,15 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
       onSubmit: () =>
         new Promise<void>((resolve, reject) => {
           handleSubmit((values) => {
-            dispatch(setResumeField({ key: "personalInfo", value: values }));
+            dispatch(setPersonalDetail(values));
             resolve();
           }, reject)();
         }),
     }),
     [handleSubmit, dispatch]
   );
+
+  const [lastChange, setLastChange] = useState("");
 
   return (
     <div className="">
