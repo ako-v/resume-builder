@@ -22,7 +22,7 @@ export type LanguagesProps = {
   languages: TemplatePropsInputs["languages"];
 };
 
-export const Languages: React.FC<LanguagesProps> = ({ languages }) => {
+const Languages: React.FC<LanguagesProps> = ({ languages }) => {
   return (
     <Section>
       <Heading className="section-title">Languages</Heading>
@@ -35,3 +35,5 @@ export const Languages: React.FC<LanguagesProps> = ({ languages }) => {
     </Section>
   );
 };
+
+export default Languages;

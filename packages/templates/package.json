@@ -4,6 +4,16 @@
   "version": "1.0.0",
   "exports": "./dist/index.js",
   "scripts": {
-    "dev": "tsc --watch --preserveWatchOutput"
+    "dev1": "rollup -c -w",
+    "dev": "tsc -w --preserveWatchOutput"
+  },
+  "imports": {
+    "#*": "./src/*"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.19.0",
+    "typescript": "^5.5.4"
   }
 }

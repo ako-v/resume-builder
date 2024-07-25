@@ -1,12 +1,19 @@
 {
-  "include": ["src", "./"],
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "outDir": "./dist",
-    "declaration": true
-  }
+    "outDir": "dist",
+    "declaration": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "#/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "./"],
+  "exclude": ["node_modules", "dist"]
 }

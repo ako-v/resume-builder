@@ -18,19 +18,19 @@ export type TemplatePropsInputs = {
     title: string;
     company: string;
     location: string;
-    startDate: string;
-    endDate: string;
-    projects?: { description?: string; responsibilities: string[] }[];
+    startDate: Date | null;
+    endDate: Date | null;
+    currentPosition?: boolean;
+    description?: string;
   }[];
   educations: {
     degree: string;
     institution: string;
     location: string;
-    startDate: string;
-    endDate: string;
+    endDate: Date | null;
   }[];
   languages: {
     language: string;
-    proficiency: 1 | 2 | 3 | 4 | 5;
+    proficiency: "elementery" | "intermediate" | "advanced" | "fluent" | "native";
   }[];
 };

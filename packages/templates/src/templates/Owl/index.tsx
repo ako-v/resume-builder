@@ -1,21 +1,23 @@
-"use-client";
+"use client";
 
 import styled, { createGlobalStyle } from "styled-components";
-import { TemplatePropsInputs } from "../../@types";
-import Section from "../../components/Section";
-import Name from "../../components/Name";
-import PersonalInfoContainer from "../../components/PersonalInfoContainer";
+
 import Link from "../../components/Link";
+import Name from "../../components/Name";
 import Heading from "../../components/Heading";
-import Paragraph from "../../components/Paragraph";
-import UnorderedListComponent from "../../components/UnorderedListComponent";
-import { Experience } from "./components/Experience";
-import { Educations } from "./components/Educations";
-import { Languages } from "./components/Languages";
+import Section from "../../components/Section";
 import JobTitle from "../../components/JobTitle";
+import PersonalInfoContainer from "../../components/PersonalInfoContainer";
+import UnorderedListComponent from "../../components/UnorderedListComponent";
+
+import Summary from "./components/Summary";
+import Languages from "./components/Languages";
+import Experience from "./components/Experience";
+import Educations from "./components/Educations";
+import { TemplatePropsInputs } from "../../@types";
 
 /* eslint-disable-next-line */
-export type OwlProps = TemplatePropsInputs & {};
+export type OwlProps = TemplatePropsInputs & { locale: string };
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -92,7 +94,7 @@ const SkillsContainer = styled.div`
   margin-top: 0.25rem;
 `;
 
-function Owl(props: OwlProps) {
+function Owl({ locale, ...props }: OwlProps) {
   const skills = props.skills;
   const halfSkillsLength = Math.ceil(skills.length / 2);
   const firstHalfSkills = skills.slice(0, halfSkillsLength);
@@ -108,6 +110,7 @@ function Owl(props: OwlProps) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
       />
+
       <GlobalStyles />
       <Container id="resume-container">
         <Section id="header">
@@ -116,23 +119,26 @@ function Owl(props: OwlProps) {
           </Name>
           <JobTitle>{props.personalInfo.jobTitle}</JobTitle>
           <PersonalInfoContainer>
-            {props.personalInfo.address && <InfoSpan>{props.personalInfo.address}</InfoSpan>}
-            {props.personalInfo.city && <InfoSpan>{props.personalInfo.city}</InfoSpan>}
-            {props.personalInfo.state && <InfoSpan>{props.personalInfo.state}</InfoSpan>}
-            {props.personalInfo.country && <InfoSpan>{props.personalInfo.country}</InfoSpan>}
-            {props.personalInfo.zipcode && <InfoSpan>{props.personalInfo.zipcode}</InfoSpan>}
+            <InfoSpan>
+              {[
+                props.personalInfo.address,
+                props.personalInfo.city,
+                props.personalInfo.state,
+                props.personalInfo.country,
+                props.personalInfo.zipcode,
+              ]
+                .filter((item) => item)
+                .join(", ")}
+            </InfoSpan>
             <Divider />
-
             <Link target="_blank" rel="noreferrer" href={`tel:${props.personalInfo.phone}`}>
               {props.personalInfo.phone}
             </Link>
             <Divider />
-
             <Link target="_blank" rel="noreferrer" href={`mailto:${props.personalInfo.email}`}>
               {props.personalInfo.email}
             </Link>
             <Divider />
-
             {props.personalInfo.website && (
               <>
                 <Link target="_blank" rel="noreferrer" href={`https://${props.personalInfo.website}`}>
@@ -173,7 +179,7 @@ function Owl(props: OwlProps) {
 
         <Section id="summary">
           <Heading>Summary</Heading>
-          <Paragraph>{props.summary}</Paragraph>
+          <Summary dangerouslySetInnerHTML={{ __html: props.summary }}></Summary>
         </Section>
         <Section id="skills">
           <Heading>Skills</Heading>
@@ -182,8 +188,8 @@ function Owl(props: OwlProps) {
             <UnorderedListComponent items={secondHalfSkills} />
           </SkillsContainer>
         </Section>
-        <Experience experiences={props.experiences} />
-        <Educations educations={props.educations} />
+        <Experience experiences={props.experiences} locale={locale} />
+        <Educations educations={props.educations} locale={locale} />
         <Languages languages={props.languages} />
       </Container>
     </>
