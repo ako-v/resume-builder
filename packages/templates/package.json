@@ -5,7 +5,8 @@
   "exports": "./dist/index.js",
   "scripts": {
     "dev1": "rollup -c -w",
-    "dev": "tsc -w --preserveWatchOutput"
+    "dev": "tsc -w --preserveWatchOutput",
+    "build": "tsc"
   },
   "imports": {
     "#*": "./src/*"

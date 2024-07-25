@@ -1,10 +1,11 @@
-import initTranslations from "@/lib/i18n";
-import RenderTemplatePage from "./renderTemplate/page";
+import dynamic from "next/dynamic";
+
+const RenderTemplate = dynamic(() => import("./editor/components/RenderTemplate"), { ssr: false });
 
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
     <main className="flex items-center justify-center">
-      <RenderTemplatePage />
+      <RenderTemplate locale={locale} />
     </main>
   );
 }
