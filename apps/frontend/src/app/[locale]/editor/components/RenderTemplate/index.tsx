@@ -1,4 +1,5 @@
 "use client";
+import parseToTemplateProps from "@/lib/utils/parseToTemplateProps";
 import { useAppSelector } from "@/redux/hooks";
 import { templates } from "@ui/templates";
 
@@ -7,23 +8,10 @@ export type RenderTemplateProps = {
 };
 
 const RenderTemplate: React.FC<RenderTemplateProps> = ({ locale }) => {
-  const { personalInfo, summary, skills, experiences, educations, languages } = useAppSelector(
-    (state) => state.resumeData
-  );
-  return (
-    <div>
-      {
-        <templates.owl
-          locale={locale}
-          personalInfo={personalInfo}
-          summary={summary}
-          skills={skills}
-          experiences={experiences}
-          educations={educations}
-          languages={languages}
-        />
-      }
-    </div>
-  );
+  const resumeData = useAppSelector((state) => state.resumeData);
+
+  const parsedData = parseToTemplateProps(resumeData, "MM-yyyy", locale);
+
+  return <div>{<templates.owl {...parsedData} />}</div>;
 };
 export default RenderTemplate;

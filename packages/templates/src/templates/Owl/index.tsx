@@ -14,10 +14,10 @@ import Summary from "./components/Summary";
 import Languages from "./components/Languages";
 import Experience from "./components/Experience";
 import Educations from "./components/Educations";
-import { TemplatePropsInputs } from "../../@types";
+import { TemplateProps } from "../../@types";
 
 /* eslint-disable-next-line */
-export type OwlProps = TemplatePropsInputs & { locale: string };
+export type OwlProps = TemplateProps;
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -94,7 +94,7 @@ const SkillsContainer = styled.div`
   margin-top: 0.25rem;
 `;
 
-function Owl({ locale, ...props }: OwlProps) {
+function Owl(props: TemplateProps) {
   const skills = props.skills;
   const halfSkillsLength = Math.ceil(skills.length / 2);
   const firstHalfSkills = skills.slice(0, halfSkillsLength);
@@ -188,8 +188,8 @@ function Owl({ locale, ...props }: OwlProps) {
             <UnorderedListComponent items={secondHalfSkills} />
           </SkillsContainer>
         </Section>
-        <Experience experiences={props.experiences} locale={locale} />
-        <Educations educations={props.educations} locale={locale} />
+        <Experience experiences={props.experiences} />
+        <Educations educations={props.educations} />
         <Languages languages={props.languages} />
       </Container>
     </>

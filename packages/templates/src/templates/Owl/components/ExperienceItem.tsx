@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { TemplatePropsInputs } from "../../../@types";
-import formatDate from "../../../utils/formatDate";
+import { TemplateProps } from "../../../@types";
 
-export type ExperienceItemProps = TemplatePropsInputs["experiences"][0] & { locale: string };
+export type ExperienceItemProps = TemplateProps["experiences"][0];
 
 const ExperienceContainer = styled.div`
   display: grid;
@@ -48,14 +47,12 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   startDate,
   title,
   description,
-  locale,
 }) => {
   return (
     <ExperienceContainer>
       <Duration>
         {/* {startDate} - {endDate} */}
-        {startDate && formatDate(startDate, "MM-yyyy", { locale })} -{" "}
-        {endDate ? formatDate(endDate, "MM-yyyy", { locale }) : "Present"}
+        {startDate} - {endDate || "Present"}
       </Duration>
       <Info>
         <Title className="font-bold">{title}</Title>

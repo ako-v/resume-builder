@@ -1,20 +1,18 @@
-import { TemplatePropsInputs } from "../../../@types";
+import { TemplateProps } from "../../../@types";
 import Heading from "../../../components/Heading";
 import Section from "../../../components/Section";
 import ExperienceItem from "./ExperienceItem";
 
 export type ExperienceProps = {
-  experiences: TemplatePropsInputs["experiences"];
-  locale: string;
+  experiences: TemplateProps["experiences"];
 };
 
-const Experience: React.FC<ExperienceProps> = ({ experiences, locale }) => {
+const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
   return (
     <Section id="experiences">
       <Heading className="section-title">EXPERIENCE</Heading>
       {experiences.map((experience, index) => (
         <ExperienceItem
-          locale={locale}
           key={index}
           startDate={experience.startDate}
           endDate={experience.endDate}

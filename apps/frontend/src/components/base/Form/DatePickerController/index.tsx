@@ -1,13 +1,14 @@
 import React from "react";
 import { Controller, RegisterOptions } from "react-hook-form";
-import { DatePickerProps } from "@mui/x-date-pickers/DatePicker";
 
-import DatePicker from "@/components/base/DatePicker";
+import DatePickerWrapper, { DatePickerWrapperProps } from "../../DatePickerWrapper";
+import { DatePickerProps } from "@mui/x-date-pickers/DatePicker";
+import DatePicker from "../../DatePicker";
 
 /**
  * Props for the DatePickerController component.
  */
-export interface DatePickerControllerProps extends DatePickerProps<Date> {
+export type DatePickerControllerProps = DatePickerProps<Date> & {
   label?: string;
   name: string;
   control: any;
@@ -17,7 +18,7 @@ export interface DatePickerControllerProps extends DatePickerProps<Date> {
   invalid?: boolean;
   noValidation?: boolean;
   required?: boolean;
-}
+};
 
 /**
  * A custom form controller component that wraps the DatePicker component.
@@ -48,22 +49,24 @@ export const DatePickerController: React.FunctionComponent<DatePickerControllerP
       name={name}
       rules={rules}
       defaultValue={props.defaultValue}
-      render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-        <DatePicker
-          {...restProps}
-          slotProps={{
-            textField: {
-              ...textField,
-              helperText: noValidation ? "" : invalid ? error?.message : " ",
-              error: invalid,
-              required,
-            },
-            ...restSlotProps,
-          }}
-          onChange={onChange}
-          value={value}
-        />
-      )}
+      render={({ field: { onChange, value }, fieldState: { invalid, error } }) => {
+        return (
+          <DatePicker
+            {...restProps}
+            slotProps={{
+              textField: {
+                ...textField,
+                helperText: noValidation ? "" : invalid ? error?.message : " ",
+                error: invalid,
+                required,
+              },
+              ...restSlotProps,
+            }}
+            onChange={onChange}
+            value={value}
+          />
+        );
+      }}
     />
   );
 };

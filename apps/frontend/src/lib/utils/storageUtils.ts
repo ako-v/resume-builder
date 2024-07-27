@@ -37,6 +37,7 @@ export const getFromLocalStorage = (key: string) => {
     const obj = localStorage?.getItem(key);
     if (obj && obj.length) {
       const parsedObj = JSON.parse(obj);
+      // return parsedObj;
       return convertISOStringsToDateObjects(parsedObj);
     } else return undefined;
   }

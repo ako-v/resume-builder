@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 import Section from "../../../components/Section";
 import Heading from "../../../components/Heading";
-import { TemplatePropsInputs } from "../../../@types";
-import formatDate from "../../../utils/formatDate";
+import { TemplateProps } from "../../../@types";
 
 const ExperienceContainer = styled.div`
   display: grid;
@@ -27,19 +26,16 @@ const FieldofStudy = styled.div`
 const University = styled.div``;
 
 export type EducationsProps = {
-  educations: TemplatePropsInputs["educations"];
-  locale: string;
+  educations: TemplateProps["educations"];
 };
 
-const Educations: React.FC<EducationsProps> = ({ educations, locale }) => {
+const Educations: React.FC<EducationsProps> = ({ educations }) => {
   return (
     <Section id="educations">
       <Heading>Educations</Heading>
       {educations.map((education, index) => (
         <ExperienceContainer key={index}>
-          <FinishedDate>
-            {education.endDate ? formatDate(education.endDate, "MM-yyyy", { locale }) : "Present"}
-          </FinishedDate>
+          <FinishedDate>{education.endDate ? education.endDate : "Present"}</FinishedDate>
           <Description>
             <FieldofStudy>{education.degree}</FieldofStudy>
             <University>

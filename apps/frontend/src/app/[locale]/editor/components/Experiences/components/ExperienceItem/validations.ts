@@ -27,14 +27,6 @@ export const getRules = (t: TFunction): Record<keyof FormFields, RegisterOptions
     },
     startDate: {
       required: t("validation.required", { field: t("form.startDate") }),
-      validate: (value) => {
-        if (!value) return t("validation.invalid", { field: t("form.endDate") });
-        const date = new Date(value);
-        const now = new Date().setHours(0, 0, 0, 0);
-        if (date.getTime() > now) {
-          return t("validation.invalid", { field: t("form.startDate") });
-        }
-      },
     },
     endDate: {
       validate: (value, formValues) => {

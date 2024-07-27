@@ -1,19 +1,24 @@
 "use client";
 import Button from "@/components/base/Button";
+import parseToTemplateProps from "@/lib/utils/parseToTemplateProps";
 import { useCreatePDFMutation } from "@/redux/apiSlice/pdf";
 import { useAppSelector } from "@/redux/hooks";
+import { useTranslation } from "react-i18next";
 
-export type PDFGeneratorProps = {
-  /* types */
-};
+export type PDFGeneratorProps = {};
 
 const PDFGenerator: React.FC<PDFGeneratorProps> = (props) => {
+  const {
+    i18n: { language },
+  } = useTranslation();
   const resumeData = useAppSelector((state) => state.resumeData);
   const [createPDF] = useCreatePDFMutation();
 
+  const parsedData = parseToTemplateProps(resumeData, "MM-yyyy", language);
+
   const handleGeneratePDF = async () => {
     try {
-      const response = await createPDF({ data: resumeData, name: "owl" }).unwrap();
+      const response = await createPDF({ data: parsedData, name: "owl" }).unwrap();
       const blob = new Blob([response], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");

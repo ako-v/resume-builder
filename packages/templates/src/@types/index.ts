@@ -34,3 +34,15 @@ export type TemplatePropsInputs = {
     proficiency: "elementery" | "intermediate" | "advanced" | "fluent" | "native";
   }[];
 };
+
+type ReplaceDateWithString<T> = {
+  [K in keyof T]: T[K] extends Date | null
+    ? string | null
+    : T[K] extends (infer U)[]
+      ? ReplaceDateWithString<U>[]
+      : T[K] extends object
+        ? ReplaceDateWithString<T[K]>
+        : T[K];
+};
+
+export type TemplateProps = ReplaceDateWithString<TemplatePropsInputs>;

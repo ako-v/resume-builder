@@ -3,14 +3,18 @@ import { format, FormatOptions } from "date-fns";
 import { format as formatJalali } from "date-fns-jalali";
 
 const formatDate = (
-  date: Date,
+  date: Date | string,
   formatString: string,
   { locale, ...options }: { locale: string } & Omit<FormatOptions, "locale">
 ): string => {
-  if (isNaN(date?.getTime?.())) {
+  let newDate = date;
+  if (typeof date === "string") {
+    newDate = new Date(date);
+  }
+  if (newDate instanceof Date && isNaN(newDate?.getTime?.())) {
     return "";
   }
-  if (date instanceof Date) {
+  if (newDate instanceof Date) {
     const dateFnsLocale = getDateFnsLocale(locale);
     if (dateFnsLocale?.code === "fa-IR") {
       return formatJalali(date, formatString, { locale: dateFnsLocale, ...options });

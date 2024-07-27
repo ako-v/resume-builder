@@ -13,7 +13,6 @@ export class PuppeteerService implements OnModuleDestroy {
     this.browser = await puppeteer.launch({
       executablePath: process.env.CHROMIUM_PATH || undefined,
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
     // Listen for shutdown signals

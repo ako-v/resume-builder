@@ -1,12 +1,9 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import { useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { getRules } from "./validations";
 import debounce from "@/lib/utils/debounce";
-import RemoveExperience from "../RemoveExperience";
 import useFormWatch from "@/lib/hooks/useFormWatch";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import InputController from "@/components/base/Form/InputController";
@@ -26,7 +23,6 @@ const ExperienceItem = forwardRef<EditorStepHandle, ExperienceItemProps>(({ inde
   const { t } = useTranslation();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dispatch = useAppDispatch();
-  const [expanded, setExpanded] = useState(true);
 
   const experience = useRef(useAppSelector((state) => state.resumeData.experiences[index]));
 

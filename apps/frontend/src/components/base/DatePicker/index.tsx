@@ -10,7 +10,7 @@ import { DatePicker as MuiDatePicker, DatePickerProps } from "@mui/x-date-picker
 import getDateFnsLocale from "@/lib/utils/getDateFnsLocale";
 import convertDateFnsLocale from "@/lib/utils/convertDateFnsLocale";
 
-const DatePicker = <TDate extends Date>(props: DatePickerProps<TDate>) => {
+const DatePicker = (props: DatePickerProps<Date>) => {
   const {
     i18n: { language },
   } = useTranslation();

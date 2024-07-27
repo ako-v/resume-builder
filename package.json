@@ -7,6 +7,7 @@
   "private": "true",
   "scripts": {
     "dev": "turbo run dev",
+    "dev:conc": "concurrently \"cd packages/templates && npm run dev\"  \"cd apps/backend && npm run dev\" \"cd apps/frontend && npm run dev\"",
     "build": "turbo run build",
     "start:prod": "turbo run start:prod"
   },
@@ -21,6 +22,8 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "turbo": "^1.13.2"
-  }
+    "concurrently": "^8.2.2",
+    "turbo": "^2.0.9"
+  },
+  "packageManager": "npm@10.8.1"
 }
