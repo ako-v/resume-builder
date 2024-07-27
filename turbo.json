@@ -8,6 +8,10 @@
     "build": {
       "cache": false,
       "persistent": false
+    },
+    "start:prod": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

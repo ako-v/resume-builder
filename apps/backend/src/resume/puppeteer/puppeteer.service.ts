@@ -11,7 +11,8 @@ export class PuppeteerService implements OnModuleDestroy {
 
   async initialize() {
     this.browser = await puppeteer.launch({
-      headless: 'new',
+      executablePath: process.env.CHROMIUM_PATH || undefined,
+      headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
