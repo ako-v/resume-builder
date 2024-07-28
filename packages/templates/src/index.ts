@@ -1,9 +1,9 @@
-import Simple from "./templates/simple";
-import Modern from "./templates/modern";
+import Eagle from "./templates/Eagle";
 import Owl from "./templates/Owl";
+import Parrot from "./templates/Parrot";
 
 export const templates = {
-  simple: Simple,
-  modern: Modern,
   owl: Owl,
+  eagle: Eagle,
+  parrot: Parrot,
 };

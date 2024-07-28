@@ -46,6 +46,7 @@ const dictionary = {
     institution: "institution",
     language: "language",
     proficiency: "proficiency",
+    link: "link",
   },
   resumeFields: {
     personalDetails: "Personal Details",

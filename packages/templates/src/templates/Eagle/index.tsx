@@ -34,14 +34,14 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #resume-container {
-    --color-primary: #111;
+    --color-primary: #099;
     --color-secondary: #333;
     --color-link: #005fb0;
   }
 `;
 
 const Container = styled.div`
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 745px;
   background-color: white;
   width: 100%;
@@ -71,12 +71,12 @@ const Container = styled.div`
   }
 `;
 
-function Owl(props: TemplateProps) {
+function Eagle(props: TemplateProps) {
   return (
     <>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
       />
 
       <GlobalStyles />
@@ -92,4 +92,4 @@ function Owl(props: TemplateProps) {
   );
 }
 
-export default Owl;
+export default Eagle;

@@ -1,20 +1,23 @@
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
-import { useForm, WatchObserver } from "react-hook-form";
+import { useFieldArray, useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 import { getRules } from "./validations";
+import debounce from "@/lib/utils/debounce";
 import { EditorStepHandle } from "../Editor";
+import useFormWatch from "@/lib/hooks/useFormWatch";
+import IconButton from "@/components/base/IconButton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import InputController from "@/components/base/Form/InputController";
 import { ResumeDataType, setResumeField } from "@/redux/resumeDataSlice";
-import useFormWatch from "@/lib/hooks/useFormWatch";
-import debounce from "@/lib/utils/debounce";
 
 export type PersonalDetailsProps = {
   /* types */
 };
 
-export type FormFields = ResumeDataType["personalInfo"]["data"];
+export type FormFields = Omit<ResumeDataType["personalInfo"]["data"], "links"> & { links: { value: string }[] };
 
 const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((props, ref) => {
   const { t } = useTranslation();
@@ -24,9 +27,11 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
 
   const { control, handleSubmit, watch } = useForm<FormFields>({
     defaultValues: {
-      ...personalDetail,
+      ...{ ...personalDetail, links: (personalDetail?.links ?? []).map((link) => ({ value: link })) },
     },
   });
+
+  const { fields, append, remove } = useFieldArray({ control, name: "links" as never });
 
   const rules = useMemo(() => getRules(t), [t]);
 
@@ -34,7 +39,15 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
     (data) => {
       timeoutRef.current = debounce(
         () => {
-          dispatch(setResumeField({ key: "personalInfo", value: data as FormFields }));
+          dispatch(
+            setResumeField({
+              key: "personalInfo",
+              value: {
+                ...data,
+                links: (data?.links ?? []).map((link) => link?.value),
+              } as ResumeDataType["personalInfo"]["data"],
+            })
+          );
         },
         timeoutRef.current,
         1000
@@ -42,6 +55,26 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
     },
     [dispatch]
   );
+
+  const handleAddNewLink = () => {
+    append({ value: "" });
+    dispatch(
+      setResumeField({
+        key: "personalInfo",
+        value: { ...personalDetail, links: [...(personalDetail?.links ?? []), ""] },
+      })
+    );
+  };
+
+  const removeLink = (index: number) => () => {
+    remove(index);
+    dispatch(
+      setResumeField({
+        key: "personalInfo",
+        value: { ...personalDetail, links: (personalDetail.links ?? []).filter((_, i) => i !== index) },
+      })
+    );
+  };
 
   useFormWatch(watch, handleFormChange);
 
@@ -51,7 +84,12 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
       onSubmit: () =>
         new Promise<void>((resolve, reject) => {
           handleSubmit((values) => {
-            dispatch(setResumeField({ key: "personalInfo", value: values }));
+            dispatch(
+              setResumeField({
+                key: "personalInfo",
+                value: { ...values, links: (values?.links ?? []).map((link) => link.value) },
+              })
+            );
             resolve();
           }, reject)();
         }),
@@ -90,14 +128,35 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
           rules={rules.email}
         />
         <InputController control={control} required name="address" label={t("form.address")} rules={rules.address} />
-        <InputController control={control} name="city" label={t("form.city")} rules={rules.city} />
+        {/* <InputController control={control} name="city" label={t("form.city")} rules={rules.city} />
         <InputController control={control} name="zipcode" label={t("form.zipcode")} rules={rules.zipcode} />
         <InputController control={control} name="state" label={t("form.state")} rules={rules.state} />
         <InputController control={control} name="country" label={t("form.country")} rules={rules.country} />
         <InputController control={control} name="website" label={t("form.website")} rules={rules.website} />
         <InputController control={control} name="twitter" label={t("form.twitter")} rules={rules.website} />
         <InputController control={control} name="linkedin" label={t("form.linkedin")} rules={rules.website} />
-        <InputController control={control} name="github" label={t("form.github")} rules={rules.github} />
+        <InputController control={control} name="github" label={t("form.github")} rules={rules.github} />  */}
+        {fields?.map((field, index) => (
+          <InputController
+            key={field.id}
+            control={control}
+            name={`links.${index}.value`}
+            label={t("form.link")}
+            rules={rules.links}
+            InputProps={{
+              endAdornment: (
+                <IconButton title={t("general.remove")} onClick={removeLink(index)}>
+                  <RemoveIcon />
+                </IconButton>
+              ),
+            }}
+          />
+        ))}
+        <div>
+          <IconButton onClick={handleAddNewLink} title={t("general.add")}>
+            <AddIcon />
+          </IconButton>
+        </div>
       </form>
     </div>
   );

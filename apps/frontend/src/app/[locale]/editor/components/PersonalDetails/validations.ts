@@ -50,28 +50,15 @@ export const getRules = (t: TFunction): Record<keyof FormFields, RegisterOptions
         message: t("validation.maxLength", { length: 150 }),
       },
     },
-    city: {
+    links: {
       maxLength: {
-        value: 30,
-        message: t("validation.maxLength", { length: 30 }),
+        value: 150,
+        message: t("validation.maxLength", { length: 150 }),
       },
-    },
-    zipcode: {
-      pattern: {
-        value: /^[0-9]*$/,
-        message: t("validation.invalid", { field: t("form.zipcode") }),
-      },
-    },
-    state: {
-      maxLength: {
-        value: 30,
-        message: t("validation.maxLength", { length: 30 }),
-      },
-    },
-    country: {
-      maxLength: {
-        value: 30,
-        message: t("validation.maxLength", { length: 30 }),
+      validate: (value) => {
+        if (!value?.startsWith("https://")) {
+          return t("validation.invalid", { field: t("form.link") });
+        }
       },
     },
   };

@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
 import { TemplateProps } from "../../../@types";
 import JobTitle from "../../../components/JobTitle";
 import Link from "../../../components/Link";
+import Name from "../../../components/Name";
 import PersonalInfoContainer from "../../../components/PersonalInfoContainer";
 import Section from "../../../components/Section";
 import styled from "styled-components";
@@ -10,7 +10,9 @@ export type PersonalInfoProps = {
   personalInfo: TemplateProps["personalInfo"];
 };
 
-const Divider = styled.span`
+const Divider = styled.div`
+  height: 12px;
+  border-left: 1px solid #333;
   opacity: 0.65;
 `;
 
@@ -19,40 +21,38 @@ const InfoSpan = styled.span`
   line-height: 1rem;
 `;
 
-const Name = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 2.5rem;
-  text-transform: capitalize;
-  margin-bottom: 0.25rem;
+const FlexDiv = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
-const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data } }) => {
+const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data, title } }) => {
   return (
     <Section id="header">
-      <div>
-        <Name>
-          {data.firstName} {data.lastName}
-        </Name>
-        <JobTitle>{data.jobTitle}</JobTitle>
-      </div>
+      <Name>
+        {data.firstName} {data.lastName}
+      </Name>
+      <JobTitle>{data.jobTitle}</JobTitle>
       <PersonalInfoContainer>
         <InfoSpan>{data.address}</InfoSpan>
-        <Divider>/</Divider>
+        <Divider />
         <Link target="_blank" rel="noreferrer" href={`tel:${data.phone}`}>
           {data.phone}
         </Link>
-        <Divider>/</Divider>
+        <Divider />
         <Link target="_blank" rel="noreferrer" href={`mailto:${data.email}`}>
           {data.email}
         </Link>
         {data?.links?.map((link) => (
-          <div key={link}>
-            <Divider>/</Divider>{" "}
+          <FlexDiv key={link}>
+            <Divider />
             <Link target="_blank" rel="noreferrer" href={link}>
               {link.replace(/^https:\/\/(www\.)?/, "")}
             </Link>
-          </div>
+          </FlexDiv>
         ))}
       </PersonalInfoContainer>
     </Section>

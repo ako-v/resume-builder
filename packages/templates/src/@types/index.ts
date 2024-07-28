@@ -12,7 +12,7 @@ export type TemplatePropsInputs = {
       linkedin?: string;
       github?: string;
       twitter?: string;
-      [key: string]: string | undefined;
+      links?: string[];
     };
   };
   summary: {
