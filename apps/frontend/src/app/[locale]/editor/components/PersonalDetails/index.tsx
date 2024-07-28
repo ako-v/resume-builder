@@ -14,13 +14,13 @@ export type PersonalDetailsProps = {
   /* types */
 };
 
-export type FormFields = ResumeDataType["personalInfo"];
+export type FormFields = ResumeDataType["personalInfo"]["data"];
 
 const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((props, ref) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const personalDetail = useAppSelector((state) => state.resumeData.personalInfo);
+  const personalDetail = useAppSelector((state) => state.resumeData.personalInfo.data);
 
   const { control, handleSubmit, watch } = useForm<FormFields>({
     defaultValues: {

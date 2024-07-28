@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const RemoveLanguage = ({ index }: { index: number }) => {
   const { t } = useTranslation();
-  const languages = useAppSelector((state) => state.resumeData.languages);
+  const languages = useAppSelector((state) => state.resumeData.languages.data);
   const dispatch = useAppDispatch();
 
   const handleRemoveLanguage = () => {

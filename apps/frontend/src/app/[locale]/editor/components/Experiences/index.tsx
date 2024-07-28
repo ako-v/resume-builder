@@ -8,16 +8,16 @@ import AddNewExperience from "./components/AddExperience";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import RemoveExperience from "./components/RemoveExperience";
 
-export type SkillsProps = {
+export type ExperiencesProps = {
   /* types */
 };
 
 const useGetExperienceLength = () => {
-  const experiences = useAppSelector((state) => state.resumeData.experiences);
+  const experiences = useAppSelector((state) => state.resumeData.experiences.data);
   return experiences.length;
 };
 
-const Experiences = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
+const Experiences = forwardRef<EditorStepHandle, ExperiencesProps>((props, ref) => {
   const experiencesLength = useGetExperienceLength();
   const experiencesRefs = useRef<(EditorStepHandle | null)[]>([]);
   const [experienceIds, setExperienceIds] = useState(

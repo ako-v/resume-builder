@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const AddNewEducation = () => {
   const { t } = useTranslation();
-  const languages = useAppSelector((state) => state.resumeData.languages);
+  const languages = useAppSelector((state) => state.resumeData.languages.data);
   const dispatch = useAppDispatch();
 
   const handleAddNewEducation = () => {
@@ -19,6 +19,7 @@ const AddNewEducation = () => {
           {
             language: "",
             proficiency: "native",
+            proficiencyText: t("languageProficiencies.native"),
           },
         ],
       })

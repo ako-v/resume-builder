@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { TemplateProps } from "../../../@types";
 
-export type ExperienceItemProps = TemplateProps["experiences"][0];
+export type ExperienceItemProps = TemplateProps["experiences"]["data"][0];
 
 const ExperienceContainer = styled.div`
   display: grid;

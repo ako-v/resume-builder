@@ -5,16 +5,14 @@ import styled, { createGlobalStyle } from "styled-components";
 import Link from "../../components/Link";
 import Name from "../../components/Name";
 import Heading from "../../components/Heading";
-import Section from "../../components/Section";
-import JobTitle from "../../components/JobTitle";
-import PersonalInfoContainer from "../../components/PersonalInfoContainer";
-import UnorderedListComponent from "../../components/UnorderedListComponent";
 
 import Summary from "./components/Summary";
 import Languages from "./components/Languages";
 import Experience from "./components/Experience";
 import Educations from "./components/Educations";
 import { TemplateProps } from "../../@types";
+import PersonalInfo from "./components/PersonalInfo";
+import Skills from "./components/Skills";
 
 /* eslint-disable-next-line */
 export type OwlProps = TemplateProps;
@@ -76,30 +74,7 @@ const Container = styled.div`
   }
 `;
 
-const Divider = styled.div`
-  height: 12px;
-  border-left: 1px solid #333;
-  opacity: 0.65;
-`;
-
-const InfoSpan = styled.span`
-  font-size: 0.75rem;
-  line-height: 1rem;
-`;
-
-const SkillsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-left: 168px;
-  margin-top: 0.25rem;
-`;
-
 function Owl(props: TemplateProps) {
-  const skills = props.skills;
-  const halfSkillsLength = Math.ceil(skills.length / 2);
-  const firstHalfSkills = skills.slice(0, halfSkillsLength);
-  const secondHalfSkills = skills.slice(halfSkillsLength);
-
   return (
     <>
       {/* <style>
@@ -113,81 +88,9 @@ function Owl(props: TemplateProps) {
 
       <GlobalStyles />
       <Container id="resume-container">
-        <Section id="header">
-          <Name>
-            {props.personalInfo.firstName} {props.personalInfo.lastName}
-          </Name>
-          <JobTitle>{props.personalInfo.jobTitle}</JobTitle>
-          <PersonalInfoContainer>
-            <InfoSpan>
-              {[
-                props.personalInfo.address,
-                props.personalInfo.city,
-                props.personalInfo.state,
-                props.personalInfo.country,
-                props.personalInfo.zipcode,
-              ]
-                .filter((item) => item)
-                .join(", ")}
-            </InfoSpan>
-            <Divider />
-            <Link target="_blank" rel="noreferrer" href={`tel:${props.personalInfo.phone}`}>
-              {props.personalInfo.phone}
-            </Link>
-            <Divider />
-            <Link target="_blank" rel="noreferrer" href={`mailto:${props.personalInfo.email}`}>
-              {props.personalInfo.email}
-            </Link>
-            <Divider />
-            {props.personalInfo.website && (
-              <>
-                <Link target="_blank" rel="noreferrer" href={`https://${props.personalInfo.website}`}>
-                  {props.personalInfo.website}
-                </Link>
-                <Divider />
-              </>
-            )}
-            {props.personalInfo.linkedin && (
-              <>
-                <Link
-                  target="_blank"
-                  rel="noreferrer"
-                  href={`https://www.linkedin.com/in/${props.personalInfo.linkedin}`}
-                >
-                  linkedin.com/in/{props.personalInfo.linkedin}
-                </Link>
-                <Divider />
-              </>
-            )}
-            {props.personalInfo.github && (
-              <>
-                <Link target="_blank" rel="noreferrer" href={`https://github.com/${props.personalInfo.github}`}>
-                  github.com/{props.personalInfo.github}
-                </Link>
-                <Divider />
-              </>
-            )}
-            {props.personalInfo.twitter && (
-              <>
-                <Link target="_blank" rel="noreferrer" href={`https://twitter.com/${props.personalInfo.twitter}`}>
-                  twitter.com/{props.personalInfo.twitter}
-                </Link>
-              </>
-            )}
-          </PersonalInfoContainer>
-        </Section>
-
-        <Section id="summary">
-          <Heading>Summary</Heading>
-          <Summary dangerouslySetInnerHTML={{ __html: props.summary }}></Summary>
-        </Section>
-        <Section id="skills">
-          <Heading>Skills</Heading>
-          <SkillsContainer>
-            <UnorderedListComponent items={firstHalfSkills} />
-            <UnorderedListComponent items={secondHalfSkills} />
-          </SkillsContainer>
-        </Section>
+        <PersonalInfo personalInfo={props.personalInfo} />
+        <Summary summary={props.summary} />
+        <Skills skills={props.skills} />
         <Experience experiences={props.experiences} />
         <Educations educations={props.educations} />
         <Languages languages={props.languages} />

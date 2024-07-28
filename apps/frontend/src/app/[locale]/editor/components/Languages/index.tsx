@@ -10,7 +10,7 @@ export type SkillsProps = {
 };
 
 const useGetLanguagesLength = () => {
-  const languages = useAppSelector((state) => state.resumeData.languages);
+  const languages = useAppSelector((state) => state.resumeData.languages.data);
   return languages.length;
 };
 

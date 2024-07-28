@@ -7,6 +7,7 @@ const dictionary = {
     remove: "remove",
     add: "add",
   },
+
   languageProficiencies: {
     elementery: "Elementery Proficiency",
     intermediate: "Limited Working Proficiency",
@@ -45,6 +46,14 @@ const dictionary = {
     institution: "institution",
     language: "language",
     proficiency: "proficiency",
+  },
+  resumeFields: {
+    personalDetails: "Personal Details",
+    summary: "Summary",
+    experiences: "Experiences",
+    educations: "Educations",
+    skills: "Skills",
+    languages: "Languages",
   },
   editorPage: {
     personalDetails: "Personal details",

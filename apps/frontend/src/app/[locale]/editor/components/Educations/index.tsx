@@ -10,7 +10,7 @@ export type SkillsProps = {
 };
 
 const useGetEducationsLength = () => {
-  const educations = useAppSelector((state) => state.resumeData.educations);
+  const educations = useAppSelector((state) => state.resumeData.educations.data);
   return educations.length;
 };
 

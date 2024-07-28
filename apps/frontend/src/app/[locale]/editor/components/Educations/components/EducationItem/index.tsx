@@ -1,8 +1,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent } from "@mui/material";
 
 import { getRules } from "./validations";
 import debounce from "@/lib/utils/debounce";
@@ -18,14 +17,14 @@ export type EducationItemProps = {
   index: number;
 };
 
-export type FormFields = ResumeDataType["educations"][0];
+export type FormFields = ResumeDataType["educations"]["data"][0];
 
 const EducationItem = forwardRef<EditorStepHandle, EducationItemProps>(({ index }, ref) => {
   const { t } = useTranslation();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dispatch = useAppDispatch();
 
-  const education = useRef(useAppSelector((state) => state.resumeData.educations[index]));
+  const education = useRef(useAppSelector((state) => state.resumeData.educations.data[index]));
 
   const { control, handleSubmit, watch, setValue, clearErrors } = useForm<FormFields>({
     defaultValues: {

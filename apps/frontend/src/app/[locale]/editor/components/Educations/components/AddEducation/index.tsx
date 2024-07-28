@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const AddNewEducation = () => {
   const { t } = useTranslation();
-  const educations = useAppSelector((state) => state.resumeData.educations);
+  const educations = useAppSelector((state) => state.resumeData.educations.data);
   const dispatch = useAppDispatch();
 
   const handleAddNewEducation = () => {

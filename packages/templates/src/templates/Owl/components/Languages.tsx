@@ -25,11 +25,11 @@ export type LanguagesProps = {
 const Languages: React.FC<LanguagesProps> = ({ languages }) => {
   return (
     <Section>
-      <Heading className="section-title">Languages</Heading>
-      {languages.map((language, index) => (
+      <Heading className="section-title">{languages.title}</Heading>
+      {languages.data.map((language, index) => (
         <LanguagesContainer key={index}>
           <Language>{language.language}</Language>
-          <Proficiency>{language.proficiency}</Proficiency>
+          <Proficiency>{language.proficiencyText}</Proficiency>
         </LanguagesContainer>
       ))}
     </Section>

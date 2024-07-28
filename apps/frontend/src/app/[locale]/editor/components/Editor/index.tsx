@@ -2,7 +2,7 @@
 
 import Button from "@/components/base/Button";
 import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PersonalDetails from "../PersonalDetails";
 import Summary from "../Summary";
@@ -11,6 +11,8 @@ import Experiences from "../Experiences";
 import Educations from "../Educations";
 import Languages from "../Languages";
 import PDFGenerator from "../PDFGenerator";
+import { useAppDispatch } from "@/redux/hooks";
+import { setResumeTitles } from "@/redux/resumeDataSlice";
 
 export type EditorProps = {
   /* types */
@@ -23,6 +25,7 @@ export type EditorStepHandle = {
 const Editor: React.FC<EditorProps> = (props) => {
   const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(0);
+  const dispatch = useAppDispatch();
 
   const personalDetailsRef = useRef<EditorStepHandle>(null);
   const summaryDetailsRef = useRef<EditorStepHandle>(null);
@@ -30,6 +33,19 @@ const Editor: React.FC<EditorProps> = (props) => {
   const experiencesDetailsRef = useRef<EditorStepHandle>(null);
   const educationDetailsRef = useRef<EditorStepHandle>(null);
   const languagesDetailsRef = useRef<EditorStepHandle>(null);
+
+  useEffect(() => {
+    dispatch(
+      setResumeTitles({
+        personalInfo: { title: t("resumeFields.personalDetails") },
+        summary: { title: t("resumeFields.summary") },
+        skills: { title: t("resumeFields.skills") },
+        experiences: { title: t("resumeFields.experiences") },
+        educations: { title: t("resumeFields.educations") },
+        languages: { title: t("resumeFields.languages") },
+      })
+    );
+  }, [t, dispatch]);
 
   const steps = useMemo(
     () => [

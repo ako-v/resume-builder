@@ -28,7 +28,7 @@ const Skills = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const skills = useAppSelector((state) => state.resumeData.skills);
+  const skills = useAppSelector((state) => state.resumeData.skills.data);
 
   const { control, handleSubmit, watch } = useForm<{ skills: { value: string }[] }>({
     defaultValues: {

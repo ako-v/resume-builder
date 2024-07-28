@@ -1,8 +1,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, MenuItem } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Card, CardContent, MenuItem } from "@mui/material";
 
 import { getRules } from "./validations";
 import debounce from "@/lib/utils/debounce";
@@ -17,7 +16,7 @@ export type LanguageItemProps = {
   index: number;
 };
 
-const menuItems: ResumeDataType["languages"][0]["proficiency"][] = [
+const menuItems: ResumeDataType["languages"]["data"][0]["proficiency"][] = [
   "native",
   "fluent",
   "advanced",
@@ -25,16 +24,16 @@ const menuItems: ResumeDataType["languages"][0]["proficiency"][] = [
   "elementery",
 ];
 
-export type FormFields = ResumeDataType["languages"][0];
+export type FormFields = ResumeDataType["languages"]["data"][0];
 
 const LanguageItem = forwardRef<EditorStepHandle, LanguageItemProps>(({ index }, ref) => {
   const { t } = useTranslation();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dispatch = useAppDispatch();
 
-  const language = useRef(useAppSelector((state) => state.resumeData.languages[index]));
+  const language = useRef(useAppSelector((state) => state.resumeData.languages.data[index]));
 
-  const { control, handleSubmit, watch, setValue, clearErrors } = useForm<FormFields>({
+  const { control, handleSubmit, watch } = useForm<FormFields>({
     defaultValues: {
       ...language.current,
     },
@@ -46,13 +45,14 @@ const LanguageItem = forwardRef<EditorStepHandle, LanguageItemProps>(({ index },
     (data) => {
       timeoutRef.current = debounce(
         () => {
-          dispatch(setResumeField({ key: "languages", index, value: data }));
+          const transformedData = { ...data, proficiencyText: t(`languageProficiencies.${data.proficiency}`) };
+          dispatch(setResumeField({ key: "languages", index, value: transformedData }));
         },
         timeoutRef.current,
         1000
       );
     },
-    [index, dispatch]
+    [index, dispatch, t]
   );
 
   useFormWatch(watch, handleChangeData);
@@ -63,12 +63,13 @@ const LanguageItem = forwardRef<EditorStepHandle, LanguageItemProps>(({ index },
       onSubmit: () =>
         new Promise<void>((resolve, reject) => {
           handleSubmit((data) => {
-            dispatch(setResumeField({ key: "languages", index, value: data }));
+            const transformedData = { ...data, proficiencyText: t(`languageProficiencies.${data.proficiency}`) };
+            dispatch(setResumeField({ key: "languages", index, value: transformedData }));
             resolve();
           }, reject)();
         }),
     }),
-    [handleSubmit, index, dispatch]
+    [handleSubmit, index, dispatch, t]
   );
 
   return (

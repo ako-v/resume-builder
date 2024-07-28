@@ -17,14 +17,14 @@ export type ExperienceItemProps = {
   index: number;
 };
 
-export type FormFields = ResumeDataType["experiences"][0];
+export type FormFields = ResumeDataType["experiences"]["data"][0];
 
 const ExperienceItem = forwardRef<EditorStepHandle, ExperienceItemProps>(({ index }, ref) => {
   const { t } = useTranslation();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dispatch = useAppDispatch();
 
-  const experience = useRef(useAppSelector((state) => state.resumeData.experiences[index]));
+  const experience = useRef(useAppSelector((state) => state.resumeData.experiences.data[index]));
 
   const { control, handleSubmit, watch, setValue, clearErrors } = useForm<FormFields>({
     defaultValues: {

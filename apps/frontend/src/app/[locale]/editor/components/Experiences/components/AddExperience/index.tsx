@@ -11,7 +11,7 @@ export type AddNewExperienceProps = {
 
 const AddNewExperience: React.FC<AddNewExperienceProps> = ({ setExperienceIds }) => {
   const { t } = useTranslation();
-  const experiences = useAppSelector((state) => state.resumeData.experiences);
+  const experiences = useAppSelector((state) => state.resumeData.experiences.data);
   const dispatch = useAppDispatch();
 
   const handleAddNewExperience = () => {

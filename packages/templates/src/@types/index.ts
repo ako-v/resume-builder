@@ -1,38 +1,57 @@
 export type TemplatePropsInputs = {
   personalInfo: {
-    firstName: string;
-    lastName: string;
-    jobTitle: string;
-    email: string;
-    phone: string;
-    address?: string;
-    website?: string;
-    linkedin?: string;
-    github?: string;
-    twitter?: string;
-    [key: string]: string | undefined;
+    title: string;
+    data: {
+      firstName: string;
+      lastName: string;
+      jobTitle: string;
+      email: string;
+      phone: string;
+      address?: string;
+      website?: string;
+      linkedin?: string;
+      github?: string;
+      twitter?: string;
+      [key: string]: string | undefined;
+    };
   };
-  summary: string;
-  skills: string[];
+  summary: {
+    title: string;
+    data: string;
+  };
+  skills: {
+    title: string;
+    data: string[];
+  };
   experiences: {
     title: string;
-    company: string;
-    location: string;
-    startDate: Date | null;
-    endDate: Date | null;
-    currentPosition?: boolean;
-    description?: string;
-  }[];
+    data: {
+      title: string;
+      company: string;
+      location: string;
+      startDate: Date | null;
+      endDate: Date | null;
+      currentPosition?: boolean;
+      description?: string;
+    }[];
+  };
   educations: {
-    degree: string;
-    institution: string;
-    location: string;
-    endDate: Date | null;
-  }[];
+    title: string;
+    data: {
+      degree: string;
+      institution: string;
+      location: string;
+      endDate: Date | null;
+    }[];
+  };
   languages: {
-    language: string;
-    proficiency: "elementery" | "intermediate" | "advanced" | "fluent" | "native";
-  }[];
+    title: string;
+    data: {
+      language: string;
+      proficiency: "elementery" | "intermediate" | "advanced" | "fluent" | "native";
+      proficiencyText: string;
+    }[];
+  };
 };
 
 type ReplaceDateWithString<T> = {

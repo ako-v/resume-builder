@@ -12,7 +12,7 @@ export type RemoveExperienceProps = {
 
 const RemoveExperience: React.FC<RemoveExperienceProps> = ({ index, id, setExperienceIds }) => {
   const { t } = useTranslation();
-  const experiences = useAppSelector((state) => state.resumeData.experiences);
+  const experiences = useAppSelector((state) => state.resumeData.experiences.data);
   const dispatch = useAppDispatch();
 
   const handleRemoveExperience = () => {

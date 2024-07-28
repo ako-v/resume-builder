@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const RemoveEducation = ({ index }: { index: number }) => {
   const { t } = useTranslation();
-  const educations = useAppSelector((state) => state.resumeData.educations);
+  const educations = useAppSelector((state) => state.resumeData.educations.data);
   const dispatch = useAppDispatch();
 
   const handleRemoveEducation = () => {
