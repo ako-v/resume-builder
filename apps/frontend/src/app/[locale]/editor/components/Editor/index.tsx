@@ -101,11 +101,6 @@ const Editor: React.FC<EditorProps> = (props) => {
         </Button>
         <Button variant="text" onClick={handleNext}>
           {activeStep + 1 === steps.length ? t("general.finish") : t("general.next")}
-          {(() => {
-            console.log(activeStep, steps.length);
-
-            return null;
-          })()}
         </Button>
       </Box>
       <Box>

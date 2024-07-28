@@ -1,7 +1,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary, MenuItem } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, MenuItem } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { getRules } from "./validations";
@@ -72,34 +72,36 @@ const LanguageItem = forwardRef<EditorStepHandle, LanguageItemProps>(({ index },
   );
 
   return (
-    <>
-      <form className="grid grid-cols-1 lg:grid-cols-2 w-full gap-y-1 gap-x-3">
-        <InputController
-          required
-          control={control}
-          name="language"
-          label={t("form.language")}
-          rules={rules.language}
-          autoFocus
-        />
-        <InputController
-          select
-          required
-          control={control}
-          name="proficiency"
-          label={t("form.proficiency")}
-          rules={rules.proficiency}
-          autoFocus
-        >
-          {menuItems.map((item) => (
-            <MenuItem key={item} value={item}>
-              {t(`languageProficiencies.${item}`)}
-            </MenuItem>
-          ))}
-        </InputController>
-      </form>
-      <RemoveLanguage index={index} />
-    </>
+    <Card>
+      <CardContent>
+        <form className="grid grid-cols-1 lg:grid-cols-2 w-full gap-y-1 gap-x-3">
+          <InputController
+            required
+            control={control}
+            name="language"
+            label={t("form.language")}
+            rules={rules.language}
+            autoFocus
+          />
+          <InputController
+            select
+            required
+            control={control}
+            name="proficiency"
+            label={t("form.proficiency")}
+            rules={rules.proficiency}
+            autoFocus
+          >
+            {menuItems.map((item) => (
+              <MenuItem key={item} value={item}>
+                {t(`languageProficiencies.${item}`)}
+              </MenuItem>
+            ))}
+          </InputController>
+        </form>
+        <RemoveLanguage index={index} />
+      </CardContent>
+    </Card>
   );
 });
 

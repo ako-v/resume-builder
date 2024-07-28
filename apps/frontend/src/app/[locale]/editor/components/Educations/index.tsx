@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
 
 import { EditorStepHandle } from "../Editor";
 import { useAppSelector } from "@/redux/hooks";
-import ExperienceItem from "./components/EducationItem";
+import EducationItem from "./components/EducationItem";
 import AddNewEducation from "./components/AddEducation";
 
 export type SkillsProps = {
@@ -40,7 +40,7 @@ const Educations = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
         {educationIds.map((id, index) => {
           return (
             <div key={id}>
-              <ExperienceItem index={index} ref={(el) => (educationsRefs.current[index] = el)} />
+              <EducationItem index={index} ref={(el) => (educationsRefs.current[index] = el)} />
             </div>
           );
         })}

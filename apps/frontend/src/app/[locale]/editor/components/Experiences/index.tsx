@@ -24,6 +24,16 @@ const Experiences = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
     Array.from({ length: experiencesLength }).map((_, index) => (Date.now() + index).toString(16))
   );
 
+  const [expanded, setExpanded] = useState<string | false>(false);
+
+  const handleExpansionChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  useEffect(() => {
+    setExpanded(experienceIds[experienceIds.length - 1]);
+  }, [experiencesLength, experienceIds]);
+
   useImperativeHandle(
     ref,
     () => ({
@@ -40,7 +50,7 @@ const Experiences = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
       <div className="grid grid-cols-1 w-full">
         {experienceIds.map((id, index) => {
           return (
-            <Accordion defaultExpanded key={id}>
+            <Accordion defaultExpanded key={id} expanded={expanded === id} onChange={handleExpansionChange(id)}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />} />
               <AccordionDetails>
                 <ExperienceItem index={index} ref={(el) => (experiencesRefs.current[index] = el)} />

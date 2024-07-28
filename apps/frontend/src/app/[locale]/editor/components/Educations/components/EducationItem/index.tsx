@@ -1,7 +1,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { getRules } from "./validations";
@@ -65,13 +65,8 @@ const EducationItem = forwardRef<EditorStepHandle, EducationItemProps>(({ index 
   );
 
   return (
-    <Accordion defaultExpanded>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1-content"
-        id="panel1-header"
-      ></AccordionSummary>
-      <AccordionDetails>
+    <Card variant="elevation">
+      <CardContent>
         <form className="grid grid-cols-1 lg:grid-cols-2 w-full gap-y-1 gap-x-3">
           <DatePickerController
             control={control}
@@ -108,8 +103,8 @@ const EducationItem = forwardRef<EditorStepHandle, EducationItemProps>(({ index 
           />
         </form>
         <RemoveEducation index={index} />
-      </AccordionDetails>
-    </Accordion>
+      </CardContent>
+    </Card>
   );
 });
 
