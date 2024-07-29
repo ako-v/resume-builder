@@ -4,7 +4,6 @@ import Button from "@/components/base/Button";
 import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import PersonalDetails from "../PersonalDetails";
 import Summary from "../Summary";
 import Skills from "../Skills";
 import Experiences from "../Experiences";
@@ -13,6 +12,9 @@ import Languages from "../Languages";
 import PDFGenerator from "../PDFGenerator";
 import { useAppDispatch } from "@/redux/hooks";
 import { setResumeTitles } from "@/redux/resumeDataSlice";
+import dynamic from "next/dynamic";
+
+const WrappedPersonalDetails = dynamic(() => import("../WrappedPersonalDetails"), { ssr: false });
 
 export type EditorProps = {
   /* types */
@@ -121,7 +123,7 @@ const Editor: React.FC<EditorProps> = (props) => {
       </Box>
       <Box>
         <Typography className="mb-3">{steps[activeStep].description}</Typography>
-        {activeStep === 0 && <PersonalDetails ref={personalDetailsRef} />}
+        {activeStep === 0 && <WrappedPersonalDetails personalInfoRef={personalDetailsRef} />}
         {activeStep === 1 && <Summary ref={summaryDetailsRef} />}
         {activeStep === 2 && <Skills ref={skillsDetailsRef} />}
         {activeStep === 3 && <Experiences ref={experiencesDetailsRef} />}

@@ -88,6 +88,7 @@ const Skills = forwardRef<EditorStepHandle, SkillsProps>((props, ref) => {
             control={control}
             name={`skills.${index}.value`}
             label={t("form.skill")}
+            autoFocus={index === fields.length - 1}
             InputProps={{
               endAdornment: (
                 <IconButton title={t("general.remove")} onClick={() => removeSkill(index)}>

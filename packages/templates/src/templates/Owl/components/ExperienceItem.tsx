@@ -50,12 +50,11 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
 }) => {
   return (
     <ExperienceContainer>
-      <Duration>
-        {/* {startDate} - {endDate} */}
-        {startDate} - {endDate || "Present"}
-      </Duration>
       <Info>
         <Title className="font-bold">{title}</Title>
+        <Duration>
+          {startDate} - {endDate || "Present"}
+        </Duration>
         <Company>
           <strong>{company}</strong> － {location}
         </Company>

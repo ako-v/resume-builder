@@ -3,7 +3,7 @@ import Owl from "./templates/Owl";
 import Parrot from "./templates/Parrot";
 
 export const templates = {
-  owl: Owl,
   eagle: Eagle,
   parrot: Parrot,
+  owl: Owl,
 };

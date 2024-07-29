@@ -5,6 +5,7 @@ import Link from "../../../components/Link";
 import PersonalInfoContainer from "../../../components/PersonalInfoContainer";
 import Section from "../../../components/Section";
 import styled from "styled-components";
+import Name from "../../../components/Name";
 
 export type PersonalInfoProps = {
   personalInfo: TemplateProps["personalInfo"];
@@ -19,32 +20,45 @@ const InfoSpan = styled.span`
   line-height: 1rem;
 `;
 
-const Name = styled.h1`
+const CustomName = styled(Name)`
   font-size: 2.5rem;
   font-weight: 600;
-  line-height: 2.5rem;
+  line-height: 2.4rem;
   text-transform: capitalize;
-  margin-bottom: 0.25rem;
+`;
+
+const CustomSection = styled(Section)`
+  border-bottom: 8px solid var(--color-primary);
+`;
+
+const CustomPersonalInfoContainer = styled(PersonalInfoContainer)`
+  padding: 0.5rem 0;
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
 `;
 
 const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data } }) => {
   return (
-    <Section id="header">
-      <div>
-        <Name>
-          {data.firstName} {data.lastName}
-        </Name>
-        <JobTitle>{data.jobTitle}</JobTitle>
-      </div>
-      <PersonalInfoContainer>
-        <InfoSpan>{data.address}</InfoSpan>
+    <CustomSection id="header">
+      <NameContainer>
+        <CustomName>
+          {data?.firstName} {data?.lastName}
+        </CustomName>
+        <JobTitle>({data?.jobTitle})</JobTitle>
+      </NameContainer>
+      <CustomPersonalInfoContainer>
+        <InfoSpan>{data?.address}</InfoSpan>
         <Divider>/</Divider>
-        <Link target="_blank" rel="noreferrer" href={`tel:${data.phone}`}>
-          {data.phone}
+        <Link target="_blank" rel="noreferrer" href={`tel:${data?.phone}`}>
+          {data?.phone}
         </Link>
         <Divider>/</Divider>
-        <Link target="_blank" rel="noreferrer" href={`mailto:${data.email}`}>
-          {data.email}
+        <Link target="_blank" rel="noreferrer" href={`mailto:${data?.email}`}>
+          {data?.email}
         </Link>
         {data?.links?.map((link) => (
           <div key={link}>
@@ -54,8 +68,8 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data } }) =
             </Link>
           </div>
         ))}
-      </PersonalInfoContainer>
-    </Section>
+      </CustomPersonalInfoContainer>
+    </CustomSection>
   );
 };
 export default PersonalInfo;

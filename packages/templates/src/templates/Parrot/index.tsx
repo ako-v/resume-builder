@@ -5,12 +5,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import Link from "../../components/Link";
 import Name from "../../components/Name";
 import Heading from "../../components/Heading";
+import Section from "../../components/Section";
+import { TemplateProps } from "../../@types";
 
 import Summary from "./components/Summary";
 import Languages from "./components/Languages";
 import Experience from "./components/Experience";
 import Educations from "./components/Educations";
-import { TemplateProps } from "../../@types";
 import PersonalInfo from "./components/PersonalInfo";
 import Skills from "./components/Skills";
 
@@ -34,14 +35,14 @@ const GlobalStyles = createGlobalStyle`
   }
 
   #resume-container {
-    --color-primary: #099;
-    --color-secondary: #333;
+    --color-primary: #111;
+    --color-secondary: #AAA;
     --color-link: #005fb0;
   }
 `;
 
 const Container = styled.div`
-  font-family: "Roboto", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   max-width: 745px;
   background-color: white;
   width: 100%;
@@ -56,6 +57,14 @@ const Container = styled.div`
 
   #header {
     margin-bottom: 0.5rem;
+  }
+
+  ${Section} {
+    h3 {
+      text-align: center;
+    }
+    border-bottom: 1px solid var(--color-secondary);
+    padding-bottom: 1rem;
   }
 
   ${Link} {
@@ -76,7 +85,7 @@ function Parrot(props: TemplateProps) {
     <>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
       />
 
       <GlobalStyles />

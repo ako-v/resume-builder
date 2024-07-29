@@ -1,3 +1,4 @@
+"use client";
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from "react";
 import { useFieldArray, useForm, WatchObserver } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -128,14 +129,6 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
           rules={rules.email}
         />
         <InputController control={control} required name="address" label={t("form.address")} rules={rules.address} />
-        {/* <InputController control={control} name="city" label={t("form.city")} rules={rules.city} />
-        <InputController control={control} name="zipcode" label={t("form.zipcode")} rules={rules.zipcode} />
-        <InputController control={control} name="state" label={t("form.state")} rules={rules.state} />
-        <InputController control={control} name="country" label={t("form.country")} rules={rules.country} />
-        <InputController control={control} name="website" label={t("form.website")} rules={rules.website} />
-        <InputController control={control} name="twitter" label={t("form.twitter")} rules={rules.website} />
-        <InputController control={control} name="linkedin" label={t("form.linkedin")} rules={rules.website} />
-        <InputController control={control} name="github" label={t("form.github")} rules={rules.github} />  */}
         {fields?.map((field, index) => (
           <InputController
             key={field.id}

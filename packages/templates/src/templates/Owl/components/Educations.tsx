@@ -32,8 +32,8 @@ export type EducationsProps = {
 const Educations: React.FC<EducationsProps> = ({ educations }) => {
   return (
     <Section id="educations">
-      <Heading>{educations.title}</Heading>
-      {educations.data.map((education, index) => (
+      <Heading>{educations?.title ?? ""}</Heading>
+      {educations?.data?.map((education, index) => (
         <ExperienceContainer key={index}>
           <FinishedDate>{education.endDate ? education.endDate : "Present"}</FinishedDate>
           <Description>

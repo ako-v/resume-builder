@@ -1,5 +1,4 @@
 const dictionary = {
-  posts: "posts",
   general: {
     back: "back",
     next: "next",

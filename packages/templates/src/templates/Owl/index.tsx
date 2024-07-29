@@ -5,12 +5,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import Link from "../../components/Link";
 import Name from "../../components/Name";
 import Heading from "../../components/Heading";
+import Section from "../../components/Section";
+import { TemplateProps } from "../../@types";
 
 import Summary from "./components/Summary";
 import Languages from "./components/Languages";
 import Experience from "./components/Experience";
 import Educations from "./components/Educations";
-import { TemplateProps } from "../../@types";
 import PersonalInfo from "./components/PersonalInfo";
 import Skills from "./components/Skills";
 
@@ -35,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
 
   #resume-container {
     --color-primary: #111;
-    --color-secondary: #333;
+    --color-secondary: #AAA;
     --color-link: #005fb0;
   }
 `;
@@ -56,6 +57,10 @@ const Container = styled.div`
 
   #header {
     margin-bottom: 0.5rem;
+  }
+
+  ${Section} {
+    padding-bottom: 1rem;
   }
 
   ${Link} {

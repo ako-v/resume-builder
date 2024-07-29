@@ -1,18 +1,17 @@
+import React, { Fragment } from "react";
 import { TemplateProps } from "../../../@types";
 import JobTitle from "../../../components/JobTitle";
 import Link from "../../../components/Link";
-import Name from "../../../components/Name";
 import PersonalInfoContainer from "../../../components/PersonalInfoContainer";
 import Section from "../../../components/Section";
 import styled from "styled-components";
+import Name from "../../../components/Name";
 
 export type PersonalInfoProps = {
   personalInfo: TemplateProps["personalInfo"];
 };
 
-const Divider = styled.div`
-  height: 12px;
-  border-left: 1px solid #333;
+const Divider = styled.span`
   opacity: 0.65;
 `;
 
@@ -21,41 +20,53 @@ const InfoSpan = styled.span`
   line-height: 1rem;
 `;
 
-const FlexDiv = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  justify-content: start;
-  align-items: center;
-  flex-wrap: wrap;
+const CustomName = styled(Name)`
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 2.4rem;
+  text-transform: capitalize;
+  text-align: center;
 `;
 
-const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data, title } }) => {
+const CustomSection = styled(Section)`
+  text-align: center;
+  border-bottom: 8px solid var(--color-primary) !important;
+`;
+
+const CustomPersonalInfoContainer = styled(PersonalInfoContainer)`
+  justify-content: center;
+  padding: 0.5rem 0;
+`;
+
+const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data } }) => {
   return (
-    <Section id="header">
-      <Name>
-        {data.firstName} {data.lastName}
-      </Name>
-      <JobTitle>{data.jobTitle}</JobTitle>
-      <PersonalInfoContainer>
+    <CustomSection id="header">
+      <div>
+        <CustomName>
+          {data.firstName} {data.lastName}
+        </CustomName>
+        <JobTitle>{data.jobTitle}</JobTitle>
+      </div>
+      <CustomPersonalInfoContainer>
         <InfoSpan>{data.address}</InfoSpan>
-        <Divider />
+        <Divider>/</Divider>
         <Link target="_blank" rel="noreferrer" href={`tel:${data.phone}`}>
           {data.phone}
         </Link>
-        <Divider />
+        <Divider>/</Divider>
         <Link target="_blank" rel="noreferrer" href={`mailto:${data.email}`}>
           {data.email}
         </Link>
         {data?.links?.map((link) => (
-          <FlexDiv key={link}>
-            <Divider />
+          <div key={link}>
+            <Divider>/</Divider>{" "}
             <Link target="_blank" rel="noreferrer" href={link}>
               {link.replace(/^https:\/\/(www\.)?/, "")}
             </Link>
-          </FlexDiv>
+          </div>
         ))}
-      </PersonalInfoContainer>
-    </Section>
+      </CustomPersonalInfoContainer>
+    </CustomSection>
   );
 };
 export default PersonalInfo;

@@ -39,37 +39,6 @@ const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo: { data, title
           {data.email}
         </Link>
         <Divider />
-        {data.website && (
-          <>
-            <Link target="_blank" rel="noreferrer" href={`https://${data.website}`}>
-              {data.website}
-            </Link>
-            <Divider />
-          </>
-        )}
-        {data.linkedin && (
-          <>
-            <Link target="_blank" rel="noreferrer" href={`https://www.linkedin.com/in/${data.linkedin}`}>
-              linkedin.com/in/{data.linkedin}
-            </Link>
-            <Divider />
-          </>
-        )}
-        {data.github && (
-          <>
-            <Link target="_blank" rel="noreferrer" href={`https://github.com/${data.github}`}>
-              github.com/{data.github}
-            </Link>
-            <Divider />
-          </>
-        )}
-        {data.twitter && (
-          <>
-            <Link target="_blank" rel="noreferrer" href={`https://twitter.com/${data.twitter}`}>
-              twitter.com/{data.twitter}
-            </Link>
-          </>
-        )}
         {data?.links?.map((link) => (
           <div key={link}>
             <Link target="_blank" rel="noreferrer" href={link}>

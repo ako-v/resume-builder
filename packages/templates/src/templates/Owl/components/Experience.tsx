@@ -10,8 +10,8 @@ export type ExperienceProps = {
 const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
   return (
     <Section id="experiences">
-      <Heading className="section-title">{experiences.title}</Heading>
-      {experiences.data.map((experience, index) => (
+      <Heading className="section-title">{experiences?.title ?? ""}</Heading>
+      {experiences?.data?.map((experience, index) => (
         <ExperienceItem
           key={index}
           startDate={experience.startDate}

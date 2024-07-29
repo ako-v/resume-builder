@@ -7,11 +7,7 @@ export type TemplatePropsInputs = {
       jobTitle: string;
       email: string;
       phone: string;
-      address?: string;
-      website?: string;
-      linkedin?: string;
-      github?: string;
-      twitter?: string;
+      address: string;
       links?: string[];
     };
   };
