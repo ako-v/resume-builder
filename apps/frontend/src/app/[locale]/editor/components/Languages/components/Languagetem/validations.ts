@@ -14,5 +14,6 @@ export const getRules = (t: TFunction): Record<keyof FormFields, RegisterOptions
     proficiency: {
       required: t("validation.required", { field: t("form.proficiency") }),
     },
+    proficiencyText: {},
   };
 };

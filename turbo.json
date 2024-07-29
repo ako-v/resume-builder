@@ -7,7 +7,8 @@
     },
     "build": {
       "cache": false,
-      "persistent": false
+      "persistent": false,
+      "dependsOn": ["^build"]
     },
     "start:prod": {
       "cache": false,

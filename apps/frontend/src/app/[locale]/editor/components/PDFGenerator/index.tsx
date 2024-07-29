@@ -3,11 +3,14 @@ import Button from "@/components/base/Button";
 import parseToTemplateProps from "@/lib/utils/parseToTemplateProps";
 import { useCreatePDFMutation } from "@/redux/apiSlice/pdf";
 import { useAppSelector } from "@/redux/hooks";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 export type PDFGeneratorProps = {};
 
 const PDFGenerator: React.FC<PDFGeneratorProps> = (props) => {
+  const searchParams = useSearchParams();
+  const templateName = searchParams.get("template") || "";
   const {
     i18n: { language },
   } = useTranslation();
@@ -18,7 +21,7 @@ const PDFGenerator: React.FC<PDFGeneratorProps> = (props) => {
 
   const handleGeneratePDF = async () => {
     try {
-      const response = await createPDF({ data: parsedData, name: "owl" }).unwrap();
+      const response = await createPDF({ data: parsedData, name: templateName }).unwrap();
       const blob = new Blob([response], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");

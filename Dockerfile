@@ -29,7 +29,20 @@ RUN npm install --omit=dev
 COPY --from=builder /app/apps/backend/dist ./apps/backend/dist
 COPY --from=builder /app/packages/templates/dist ./packages/templates/dist
 
+# RUN addgroup -S pptruser && adduser -S -G root -g pptruser pptruser
+# RUN cd ~/.cache/puppeteer/chrome/linux-*/chrome-linux64/
+# RUN chown pptruser:pptruser ~/.cache/puppeteer/chrome/linux-*/chrome-linux64/chrome_sandbox
+# RUN chmod 4755 ~/.cache/puppeteer/chrome/linux-*/chrome-linux64/chrome_sandbox
+# RUN mkdir -p /usr/local/sbin
+# RUN cp -p ~/.cache/puppeteer/chrome/linux-*/chrome-linux64/chrome_sandbox /usr/local/sbin/chrome-devel-sandbox
+# RUN export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+# ENV CHROME_DEVEL_SANDBOX /usr/local/sbin/chrome-devel-sandbox
+# # Switch to the non-root user
+# USER pptruser
+
+
 WORKDIR /app/apps/backend
+
 
 EXPOSE 5000
 
@@ -48,6 +61,7 @@ RUN npm install --omit=dev
 
 COPY --from=builder /app/apps/frontend/.next ./apps/frontend/.next
 COPY --from=builder /app/packages/templates/dist ./packages/templates/dist
+
 
 WORKDIR /app/apps/frontend
 
