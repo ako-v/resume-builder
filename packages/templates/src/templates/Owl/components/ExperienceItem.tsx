@@ -56,7 +56,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
           {startDate} - {endDate || "Present"}
         </Duration>
         <Company>
-          <strong>{company}</strong> － {location}
+          <strong>{company}</strong> - {location}
         </Company>
         <Description dangerouslySetInnerHTML={{ __html: description || "" }} />
       </Info>

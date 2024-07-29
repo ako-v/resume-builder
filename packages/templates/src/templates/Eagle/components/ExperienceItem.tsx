@@ -57,7 +57,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
       <Info>
         <Title className="font-bold">{title}</Title>
         <Company>
-          <strong>{company}</strong> － {location}
+          <strong>{company}</strong> - {location}
         </Company>
         <Description dangerouslySetInnerHTML={{ __html: description || "" }} />
       </Info>

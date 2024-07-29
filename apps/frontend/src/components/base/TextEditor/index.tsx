@@ -67,7 +67,29 @@ const TextEditor = forwardRef<Quill, TextEditorProps>(({ defaultValue, onChange,
 
         delta.ops.forEach((op) => {
           if (op.insert) {
-            newDelta.insert(op.insert);
+            // Retain specific attributes
+            let attributesToRetain: Record<string, string | boolean> = {};
+            if (op.attributes) {
+              if (op.attributes.link) {
+                attributesToRetain.link = op.attributes.link as string;
+              }
+              if (op.attributes.list === "bullet" || op.attributes.list === "ordered") {
+                attributesToRetain.list = op.attributes.list;
+              }
+              if (op.attributes.underline) {
+                attributesToRetain.underline = true;
+              }
+              if (op.attributes.strike) {
+                attributesToRetain.strike = true;
+              }
+              if (op.attributes.italic) {
+                attributesToRetain.italic = true;
+              }
+              if (op.attributes.bold) {
+                attributesToRetain.bold = true;
+              }
+            }
+            newDelta.insert(op.insert, attributesToRetain);
           }
         });
 

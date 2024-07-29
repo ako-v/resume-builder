@@ -39,6 +39,7 @@ export class PdfGeneratorService {
       const pdf = await page.pdf({
         format: 'A4',
         printBackground: true,
+        waitForFonts: true,
         displayHeaderFooter: false,
         margin: {
           top: '0.3in',

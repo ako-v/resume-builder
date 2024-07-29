@@ -52,7 +52,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
     <ExperienceContainer>
       <Info>
         <Title className="font-bold">{title}</Title>
-        <strong>{company}</strong> － {location}
+        <strong>{company}</strong> - {location}
         <Company>
           <Duration>
             {startDate} - {endDate || "Present"}

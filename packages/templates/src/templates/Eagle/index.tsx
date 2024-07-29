@@ -69,6 +69,11 @@ const Container = styled.div`
   ${Heading} {
     color: var(--color-primary);
   }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
 `;
 
 function Eagle(props: TemplateProps) {
