@@ -13,7 +13,9 @@ export class PuppeteerService implements OnModuleDestroy {
     this.browser = await puppeteer.launch({
       executablePath: process.env.CHROMIUM_PATH || undefined,
       headless: true,
-      // args: ['--no-sandbox', '--disable-setuid-sandbox'], // Todo!: Remove this line in production and change the docker file instead
+      args: process.env.CHROMIUM_PATH
+        ? ['--no-sandbox', '--disable-setuid-sandbox']
+        : undefined, // Todo!: Remove this line in production and change the docker file instead
     });
 
     // Listen for shutdown signals

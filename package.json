@@ -6,24 +6,20 @@
   "license": "ISC",
   "private": "true",
   "scripts": {
-    "dev": "turbo run dev",
-    "dev:conc": "concurrently \"cd packages/templates && npm run dev\"  \"cd apps/backend && npm run dev\" \"cd apps/frontend && npm run dev\"",
-    "build": "turbo run build",
-    "start:prod": "turbo run start:prod"
+    "dev": "concurrently \"cd packages/templates && npm run dev\"  \"cd apps/backend && npm run dev\" \"cd apps/frontend && npm run dev\"",
+    "build": "concurrently \"cd apps/backend && npm run build\" \"cd apps/frontend && npm run build\"",
+    "build:back": "cd apps/backend && npm run build",
+    "build:front": "cd apps/frontend && npm run build"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "dependencies": {
-    "clsx": "^2.1.0",
-    "date-fns": "^3.6.0",
-    "date-fns-jalali": "^3.6.0-1",
-    "styled-components": "^6.1.8"
+    "styled-components": "6.1.8"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "turbo": "^2.0.9"
+    "concurrently": "^8.2.2"
   },
-  "packageManager": "npm@10.8.1"
+  "packageManager": "npm@10.8.2"
 }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 
-import { templates } from '@ui/templates';
+import { templates } from '@templates/index';
 import { HttpStatusMessage } from '../../shared/http-status-message.enum';
 
 @Injectable()
