@@ -7,6 +7,7 @@ import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScri
 import "./globals.css";
 import i18nConfig from "@/../i18nConfig";
 import Providers from "@/components/features/Providers";
+import ResumeInitializer from "@/components/features/ResumeInitializer";
 
 const fontFamily = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
           <Paper className="h-screen rounded-none overflow-auto" elevation={0}>
             {children}
           </Paper>
+          <ResumeInitializer />
         </Providers>
       </body>
     </html>

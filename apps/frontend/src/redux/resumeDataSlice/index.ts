@@ -1,7 +1,7 @@
 import { AppStorageKeys } from "@/constants";
 import { getFromLocalStorage } from "@/lib/utils/storageUtils";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TemplatePropsInputs } from "@ui/templates";
+import { TemplatePropsInputs } from "@templates/index";
 
 export type ResumeDataType = TemplatePropsInputs;
 const persistedResumeData = getFromLocalStorage(AppStorageKeys.RESUME_DATA);
@@ -62,8 +62,8 @@ const resumeDataSlice = createSlice({
   name: "resumeData",
   initialState,
   reducers: {
-    setPersonalDetail: (state, { payload }: PayloadAction<ResumeDataType["personalInfo"]>) => {
-      state.personalInfo = payload;
+    setResumeData: (state, { payload }: PayloadAction<TemplatePropsInputs>) => {
+      Object.assign(state, payload);
     },
     setResumeTitles: (state, { payload }: PayloadAction<ExtractTitles<TemplatePropsInputs>>) => {
       state.personalInfo.title = payload.personalInfo.title;
@@ -90,6 +90,6 @@ const resumeDataSlice = createSlice({
   },
 });
 
-export const { setPersonalDetail, setResumeField, setResumeTitles } = resumeDataSlice.actions;
+export const { setResumeData, setResumeField, setResumeTitles } = resumeDataSlice.actions;
 
 export default resumeDataSlice.reducer;

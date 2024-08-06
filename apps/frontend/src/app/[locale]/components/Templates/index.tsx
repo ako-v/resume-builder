@@ -1,8 +1,7 @@
 "use client";
 
-import { templates } from "@ui/templates";
+import { templates } from "@templates/index";
 import Link from "next/link";
-import RenderTemplate from "../../editor/components/RenderTemplate";
 import Image from "next/image";
 import { Card, CardContent } from "@mui/material";
 

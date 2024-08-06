@@ -34,12 +34,16 @@ export const removeFromSession = (key: string) => {
  */
 export const getFromLocalStorage = (key: string) => {
   if (global.window !== undefined) {
-    const obj = localStorage?.getItem(key);
-    if (obj && obj.length) {
-      const parsedObj = JSON.parse(obj);
-      // return parsedObj;
-      return convertISOStringsToDateObjects(parsedObj);
-    } else return undefined;
+    try {
+      const item = localStorage?.getItem(key);
+      if (item && item.length) {
+        const parsedObj = JSON.parse(item);
+        // return parsedObj;
+        return convertISOStringsToDateObjects(parsedObj);
+      } else return undefined;
+    } catch (error) {
+      return undefined;
+    }
   }
 };
 
@@ -49,7 +53,9 @@ export const getFromLocalStorage = (key: string) => {
  * @param item - The item to save.
  */
 export const saveToLocalStorage = (key: string, item: any) => {
-  window?.localStorage?.setItem(key, JSON.stringify(item));
+  if (global.window !== undefined) {
+    localStorage?.setItem(key, JSON.stringify(item));
+  }
 };
 
 /**

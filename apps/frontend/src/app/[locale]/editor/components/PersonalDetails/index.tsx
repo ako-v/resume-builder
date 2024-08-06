@@ -24,11 +24,11 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const personalDetail = useAppSelector((state) => state.resumeData.personalInfo.data);
+  const personalInfo = useAppSelector((state) => state.resumeData.personalInfo.data);
 
   const { control, handleSubmit, watch } = useForm<FormFields>({
     defaultValues: {
-      ...{ ...personalDetail, links: (personalDetail?.links ?? []).map((link) => ({ value: link })) },
+      ...{ ...personalInfo, links: (personalInfo?.links ?? []).map((link) => ({ value: link })) },
     },
   });
 
@@ -62,7 +62,7 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
     dispatch(
       setResumeField({
         key: "personalInfo",
-        value: { ...personalDetail, links: [...(personalDetail?.links ?? []), ""] },
+        value: { ...personalInfo, links: [...(personalInfo?.links ?? []), ""] },
       })
     );
   };
@@ -72,7 +72,7 @@ const PersonalDetails = forwardRef<EditorStepHandle, PersonalDetailsProps>((prop
     dispatch(
       setResumeField({
         key: "personalInfo",
-        value: { ...personalDetail, links: (personalDetail.links ?? []).filter((_, i) => i !== index) },
+        value: { ...personalInfo, links: (personalInfo.links ?? []).filter((_, i) => i !== index) },
       })
     );
   };

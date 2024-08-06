@@ -1,7 +1,7 @@
 "use client";
 import parseToTemplateProps from "@/lib/utils/parseToTemplateProps";
 import { useAppSelector } from "@/redux/hooks";
-import { templates } from "@ui/templates";
+import { templates } from "@templates/index";
 import { useSearchParams } from "next/navigation";
 
 export type RenderTemplateProps = {

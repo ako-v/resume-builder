@@ -1,4 +1,3 @@
-import { TemplateProps, TemplatePropsInputs } from "@ui/templates";
 import formatDate from "./formatDate";
 
 const parseToTemplateProps = (obj: Record<string, any>, dateFormat: string, locale: string): any => {
