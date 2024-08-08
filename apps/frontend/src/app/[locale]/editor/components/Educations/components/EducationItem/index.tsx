@@ -64,7 +64,7 @@ const EducationItem = forwardRef<EditorStepHandle, EducationItemProps>(({ index 
   );
 
   return (
-    <Card variant="elevation">
+    <Card variant="elevation" sx={{ backgroundImage: "none" }}>
       <CardContent>
         <form className="grid grid-cols-1 lg:grid-cols-2 w-full gap-y-1 gap-x-3">
           <DatePickerController

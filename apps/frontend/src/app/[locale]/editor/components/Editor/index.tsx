@@ -103,8 +103,8 @@ const Editor: React.FC<EditorProps> = (props) => {
   };
 
   return (
-    <Box className="px-3">
-      <Stepper alternativeLabel>
+    <Box px={1.5}>
+      <Stepper alternativeLabel sx={{ mb: 2 }}>
         {steps.map((step, index) => {
           return (
             <Step key={step.title} active={activeStep === index} completed={activeStep > index}>
@@ -113,16 +113,16 @@ const Editor: React.FC<EditorProps> = (props) => {
           );
         })}
       </Stepper>
-      <Box className="flex justify-between px-2">
-        <Button variant="text" onClick={handleBack} disabled={activeStep === 0}>
+      <Box display="flex" justifyContent="space-between" px={1} mb={2}>
+        <Button onClick={handleBack} disabled={activeStep === 0}>
           {t("general.back")}
         </Button>
-        <Button variant="text" onClick={handleNext}>
+        <Button onClick={handleNext}>
           {activeStep + 1 === steps.length ? t("general.finish") : t("general.next")}
         </Button>
       </Box>
       <Box>
-        <Typography className="mb-3">{steps[activeStep].description}</Typography>
+        <Typography mb={1.5}>{steps[activeStep].description}</Typography>
         {activeStep === 0 && <WrappedPersonalDetails personalInfoRef={personalDetailsRef} />}
         {activeStep === 1 && <Summary ref={summaryDetailsRef} />}
         {activeStep === 2 && <Skills ref={skillsDetailsRef} />}

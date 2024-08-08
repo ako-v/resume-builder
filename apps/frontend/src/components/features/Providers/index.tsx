@@ -16,15 +16,15 @@ export type ProvidersProps = {
 
 const Providers: React.FC<ProvidersProps> = ({ children, params }) => {
   return (
-    <ThemeRegistry params={params}>
-      <ReduxProvider>
+    <ReduxProvider>
+      <ThemeRegistry params={params}>
         <TranslationProvider locale={params.locale}>
           <SnackbarProvider maxSnack={3}>
             <StyledComponentsProvider>{children}</StyledComponentsProvider>
           </SnackbarProvider>
         </TranslationProvider>
-      </ReduxProvider>
-    </ThemeRegistry>
+      </ThemeRegistry>
+    </ReduxProvider>
   );
 };
 
